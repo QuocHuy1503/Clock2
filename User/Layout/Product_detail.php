@@ -6,8 +6,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="icon" href="../../admin/vendor/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="../../fontawesome-free-6.5.1-web/css/all.min.css">
     <link rel="stylesheet" href="../../Asset/css/sb-admin-2.min.css">
     <link rel="stylesheet" href="../../Asset/vendor/bootstrap/js/bootstrap.bundle.min.js">
 
@@ -42,7 +40,15 @@
 </head>
 <body>
 <?php
-include_once 'Header.php'
+include_once 'Header.php';
+include_once '../../connect/open.php';
+$clock_id = $_GET['clock_id'];
+$sql = "SELECT *, categories.name as cat_name FROM clock INNER JOIN categories ON clock.category_id = categories.id WHERE clock_id = '$clock_id'";
+$clock = mysqli_query($connect,$sql);
+include_once '../../connect/close.php';
+if(mysqli_num_rows($clock) > 0) {
+// Use a while loop to iterate over each row
+while ($row = mysqli_fetch_assoc($clock)) {
 ?>
 <div class="container-fluid mt-5 mb-5">
     <div class="row d-flex justify-content-center">
@@ -51,22 +57,24 @@ include_once 'Header.php'
                 <div class="row">
                     <div class="col-md-6">
                         <div class="images p-3">
-                            <div class="text-center p-4"> <img id="main-image" src="../../Asset/img/images.jfif" width="250" /> </div>
-                            <div class="thumbnail text-center"> <img onclick="change_image(this)" src="../../Asset/img/download.jfif" width="70"> <img onclick="change_image(this)" src="../../Asset/img/images.jfif" width="70"> </div>
-                        </div>
+                            <div class="text-center p-4"> <img id="main-image" src="../../Asset/img/<?=$row['image']?>" width="250" /> </div>
+<!--                            <div class="thumbnail text-center"> <img onclick="change_image(this)" src="../../Asset/img/download.jfif" width="70"> <img onclick="change_image(this)" src="../../Asset/img/images.jfif" width="70"> </div>
+-->                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="product p-4">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center"> <i class="fa fa-long-arrow-left"></i> <span class="ml-1">Back</span> </div> <i class="fa fa-shopping-cart text-muted"></i>
+                                <div class="d-flex align-items-center">
+                                    <span class="ml-1">Back</span>
+                                </div>
                             </div>
-                            <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">Orianz</span>
-                                <h5 class="text-uppercase">Men's slim fit t-shirt</h5>
+                            <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand"><?=$row['cat_name']?></span>
+                                <h5 class="text-uppercase"><?=$row['clock_name']?></h5>
                                 <div class="price d-flex flex-row align-items-center"> <span class="act-price">$20</span>
                                     <div class="ml-2"> <small class="dis-price">$59</small> <span>40% OFF</span> </div>
                                 </div>
                             </div>
-                            <p class="about">Shop from a wide range of t-shirt from orianz. Pefect for your everyday use, you could pair it with a stylish pair of jeans or trousers complete the look.</p>
+                            <p class="about"><?= $row['description']?></p>
                             <div class="sizes mt-5">
                                 <h6 class="text-uppercase">Size</h6> <label class="radio"> <input type="radio" name="size" value="S" checked> <span>S</span> </label> <label class="radio"> <input type="radio" name="size" value="M"> <span>M</span> </label> <label class="radio"> <input type="radio" name="size" value="L"> <span>L</span> </label> <label class="radio"> <input type="radio" name="size" value="XL"> <span>XL</span> </label> <label class="radio"> <input type="radio" name="size" value="XXL"> <span>XXL</span> </label>
                             </div>
@@ -78,7 +86,11 @@ include_once 'Header.php'
         </div>
     </div>
 </div>
-<?php
+    <?php
+}
+} else {
+    echo "No results found.";
+}
 include_once 'Footer.php';
 ?>
 </body>
