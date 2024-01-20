@@ -37,7 +37,7 @@ if(isset($_GET['page'])){
 //Tính bản ghi bắt đầu của trang
 $start = ($page - 1) * $recordOnePage;
 //Query để lấy dữ liệu từ bảng classes trên db vềza
-$sql1 = "SELECT clock.* , categories.name AS categories_name FROM clock INNER JOIN categories ON clock.category_id = categories.id  WHERE clock_name LIKE '%$search%' LIMIT $start, $recordOnePage";
+$sql1 = "SELECT clock.* , categories.name AS categories_name FROM clock INNER JOIN categories ON clock.category_id = categories.id WHERE clock_name LIKE '%$search%' ORDER BY clock_id ASC LIMIT $start, $recordOnePage";
 //Chạy query
 $clocks = mysqli_query($connect, $sql1);
 //Đóng kết nối
@@ -86,7 +86,7 @@ include_once '../../../connect/close.php';
                 <?= $cl['categories_name'] ?>
             </td>
             <td>
-                <img src="../../image/<?php echo $cl['image'] ?>" width="50px" height="50px">
+                <img src="../../../Asset/img/<?php echo $cl['image'] ?>" width="50px" height="50px">
             </td>
             <td>
                 <a class="btn btn-primary active" href="edit.php?id=<?= $cl['clock_id'] ?> ">Edit</a>

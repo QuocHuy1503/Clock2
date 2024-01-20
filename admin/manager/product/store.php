@@ -10,11 +10,11 @@ include_once '../../../connect/open.php';
 $sql = "INSERT INTO clock(clock_name,publication_year,description,price,quantity,image,category_id) VALUES ('$clock_name','$publication_year','$description','$price','$quantity','$image','$category_id')";
 mysqli_query($connect, $sql);
 mysqli_close($connect);
-if(!file_exists("../image" . $image)) {
+if(!file_exists("../../../Asset/img" . $image)) {
     //Lấy được đường dẫn hiện tại của ảnh
     $path = $_FILES['image']['tmp_name'];
     //Lưu ảnh từ đường dẫn hiện tại vào folder
-    move_uploaded_file($path, "../image" . $image);
+    move_uploaded_file($path, "../../../Asset/img" . $image);
 }
 header('Location:index.php');
 ?>

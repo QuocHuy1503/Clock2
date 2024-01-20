@@ -59,8 +59,8 @@ foreach ($clocks as $cl){
             }
             ?>
         </select><br>
-        Image: <input type="file" name="image" value="<?= $cl['image'] ?>">
-        <img src="../../image/<?=$cl['image']?>">
+        Image: <input type="file" name="image" value="../../../Asset/img/<?= $cl['image'] ?>">
+        <img src="../../../Asset/image/<?=$cl['image']?>">
         <br>
         <button>Update</button>
     </form>
