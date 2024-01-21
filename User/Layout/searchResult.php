@@ -9,14 +9,36 @@
 </head>
 <body>
 <?php
+//Nhúng header vào
+//Nhúng file open.php để mở kết nối
+include_once '../../connect/open.php';
+//Khai báo biến search
 $search = "";
 //Lấy giá trị được search về với điều kiện $_GET['search'] tồn tại
 if(isset($_GET['search'])){
     $search = $_GET['search'];
 }
+//Khai báo số bản ghi 1 trang
+$recordOnePage = 10;
+//Query để lấy số bản ghi
+$sqlCountRecord = "SELECT COUNT(*) AS count_record FROM clock WHERE clock_name LIKE '%$search%'";
+//Chạy query lấy số bản ghi
+$countRecords = mysqli_query($connect, $sqlCountRecord);
+//foreach để lấy số bản ghi
+foreach ($countRecords as $countRecord){
+    $records = $countRecord['count_record'];
+}
+//Tính số trang
+$countPage = ceil($records / $recordOnePage);
+//Lấy trang hiện tại (nếu không tồn tại page hiện tại thì page hiện tại = 1)
+$page = 1;
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
+}
+//Tính bản ghi bắt đầu của trang
 include_once 'Header.php';
-include_once '../../connect/open.php';
-$sql= "SELECT * FROM clock WHERE clock_name LIKE '%$search%'";
+$start = ($page - 1) * $recordOnePage;
+$sql= "SELECT * FROM clock WHERE (clock_name LIKE '%$search%')  LIMIT $start,$recordOnePage";
 $clock = mysqli_query($connect,$sql);
 include_once '../../connect/close.php';
 ?>
@@ -27,30 +49,61 @@ include_once '../../connect/close.php';
 
             <?php
             /*Vòng lặp để hiển thị tất cả sản phẩm - Loop for displaying all product*/
-            foreach ($clock as $cl){
+            if(mysqli_num_rows($clock) > 0) {
+            // Use a while loop to iterate over each row
+            while ($row = mysqli_fetch_assoc($clock)) {
                 ?>
                 <div class="col-md-6 col-lg-4 col-xl-3">
-                    <a href="Product_detail.php">
+                    <a href="Product_detail.php?clock_id=<?= $row['clock_id']?>">
                         <div class="single-product">
                             <div class="part-1">
-                                <img src="../../Asset/img/<?= $cl['image']?>" style="">
+                                <img src="../../Asset/img/<?= $row['image']?>" style="">
                             </div>
                             <div class="part-2">
-                                <h3 class="product-title"><?= $cl['clock_name']?></h3>
-                                <h4 class="product-old-price">$<?= $cl['price'] + 40?></h4>
-                                <h4 class="product-price">$<?= $cl['price']?></h4>
+                                <h3 class="product-title"><?= $row['clock_name']?></h3>
+                                <h4 class="product-old-price">$<?= $row['price'] + 40?></h4>
+                                <h4 class="product-price">$<?= $row['price']?></h4>
                             </div>
                         </div>
                     </a>
                 </div>
                 <?php
-                /*Vòng lặp để hiển thị tất cả sản phẩm - Loop for displaying all product*/
-            }
+                }
+            } else {?>
+                <div class="col-12 text-center mt-4" style="height: 200px">
+                    <h2>No results found for "<?php echo htmlspecialchars($search); ?>"</h2>
+                </div>
+            <?php
+                }
             ?>
         </div>
     </div>
 </section>
-
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <!--<li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>-->
+        <?php
+        for($i = 1; $i <= $countPage; ++$i){
+            ?>
+            <li class="page-item"> <a href="?page=<?= $i ?>&search=<?= $search ?>" class="page-link"><?= $i ?></a></li>
+            <?php
+        }
+        ?>
+        <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
+         <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+        <!--<li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>-->
+    </ul>
+</nav>
 </body>
 <?php
 include_once 'Footer.php';

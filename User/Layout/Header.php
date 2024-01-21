@@ -217,13 +217,17 @@ if(isset($_GET['search'])){
             <ul class="navbar-nav">
                 <?php
                 /*Vong lap de lay brand/categories*/
+                include_once '../../connect/open.php';
+                $sqlCategories = "SELECT * FROM categories";
+                $categories = mysqli_query($connect,$sqlCategories);
+                foreach ($categories as $category){
                 ?>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Categories</a>
+                    <a class="nav-link active" aria-current="page" href="searchResult.php?id=<?=$category['id']?>"><?=$category['name']?></a>
                 </li>
                 <?php
                 /*end vong lap*/
-
+                }
                 ?>
                 <!--3-->
             </ul>
