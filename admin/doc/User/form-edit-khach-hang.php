@@ -133,7 +133,12 @@
 </style>
 <!-- Navbar-->
 <?php
-include_once '../header-navbar.php';
+include_once '../layout/header-navbar.php';
+include_once '../../../connect/open.php';
+$id = $_GET['user_id'];
+$sql = "SELECT * FROM user WHERE user_id = '$id'";
+$user = mysqli_query($connect,$sql);
+include_once '../../../connect/close.php';
 ?>
 <main class="app-content">
     <div class="app-title">
@@ -156,39 +161,39 @@ include_once '../header-navbar.php';
                         </div>
 
                     </div>
-                    <form class="row" action="store.php"><!--
-                        <div class="form-group col-md-4">
-                            <label class="control-label">ID nhân viên</label>
-                            <input class="form-control" type="text">
-                        </div>-->
+                    <form class="row" action="update.php" method="post">
+                        <?php foreach ($user as $u){?>
                         <div class="form-group col-md-4">
                             <label class="control-label">Họ và tên</label>
-                            <input class="form-control" type="text" required>
+                            <input class="form-control" type="text" name="user_name" value="<?=$u['user_name']?>">
                         </div>
                         <div class="form-group col-md-4">
-                            <label class="control-label">Địa chỉ email</label>
-                            <input class="form-control" type="text" required>
+                            <label class="control-label">Địa chỉ thường trú</label>
+                            <input class="form-control" type="text" required name="address" value="<?=$u['address']?>">
                         </div>
-                        <!--  <div class="form-group col-md-4">
-                              <label class="control-label">Địa chỉ thường trú</label>
-                              <input class="form-control" type="text" required>
-                          </div>-->
+                        <div class="form-group col-md-4">
+                              <label class="control-label">Địa chỉ email</label>
+                              <input class="form-control" type="text" required name="email" value="<?=$u['email']?>">
+                          </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Số điện thoại</label>
-                            <input class="form-control" type="number" required>
+                            <input class="form-control" type="number" required name="phone" value="<?=$u['phone']?>">
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Mật khẩu</label>
-                            <input class="form-control" type="number" required>
+                            <input class="form-control" type="number" required name="password" value="<?=$u['password']?>">
                         </div>
                         <div class="form-group col-md-3">
                             <label class="control-label">Trạng thái tài khoản</label>
-                            <select class="form-control" id="exampleSelect2" required>
+                            <select class="form-control" id="exampleSelect2" required name ="status" value="<?=$u['status']?>">
                                 <option>-- Chọn giới tính --</option>
-                                <option>Offline</option>
-                                <option>Online</option>
-                                <option>Locked</option>
+                                <option value="0">Offline</option>
+                                <option value="1">Online</option>
+                                <option value="2">Locked</option>
                             </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input class="form-control" type="hidden"  name="user_id" value="<?=$u['user_id']?>">
                         </div>
                         <!--  <div class="form-group col-md-4">
                               <label class="control-label">Ngày sinh</label>
@@ -275,8 +280,10 @@ include_once '../header-navbar.php';
 
 
                 </div>
-                <button class="btn btn-save" type="button">Lưu lại</button>
+                <button class="btn btn-save" type="submit">Lưu lại</button>
                 <a class="btn btn-cancel" href="index.php">Hủy bỏ</a>
+                <?php }?>
+                        </form>
             </div>
 
 </main>

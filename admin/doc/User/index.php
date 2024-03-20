@@ -24,7 +24,7 @@
 <body onload="time()" class="app sidebar-mini rtl">
 <!-- Navbar-->
 <?php
-include_once '../header-navbar.php';
+include_once '../layout/header-navbar.php';
 include_once '../../../connect/open.php';
 $sql = "SELECT * FROM user";
 $users = mysqli_query($connect,$sql);
@@ -35,7 +35,7 @@ include_once '../../../connect/close.php';
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item active"><a href="#"><b>Danh sách nhân viên</b></a></li>
         </ul>
-        <div id="clock"></div>
+        <div id="watch"></div>
     </div>
 
     <div class="row">
@@ -49,31 +49,7 @@ include_once '../../../connect/close.php';
                             <a class="btn btn-add btn-sm" href="form-add-khach-hang.php" title="Thêm"><i class="fas fa-plus"></i>
                                 Tạo mới khách hàng</a>
                         </div>
-                        <!--<div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
-                                    class="fas fa-file-upload"></i> Tải từ file</a>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                                    class="fas fa-print"></i> In dữ liệu</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i
-                                    class="fas fa-copy"></i> Sao chép</a>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
-                                    class="fas fa-file-pdf"></i> Xuất PDF</a>
-                        </div>
-                        <div class="col-sm-2">
-                            <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                                    class="fas fa-trash-alt"></i> Xóa tất cả </a>
-                        </div>-->
+            
                     </div>
                     <table class="table table-hover table-bordered js-copytextarea" cellpadding="0" cellspacing="0" border="0"
                            id="sampleTable">
@@ -104,125 +80,17 @@ include_once '../../../connect/close.php';
                             <td><?= $user['email']?>  </td>
                             <td><?php if( $user['status'] == 0){ echo 'Offline';} elseif ($user['status'] == 1){ echo 'Online';} else{ echo 'Locked';}?></td>
                             <td>Bán hàng</td>
-                            <td class="table-td-center"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                                                onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
-                                </button>
+                            <td class="table-td-center">
+                                <a href="destroy.php?id=<?=$user['user_id']?>" 
+                                class="btn btn-primary btn-sm trash">
+                                <i class="fas fa-trash-alt"></i>
+                                </a>
+                                <a href="form-edit-khach-hang.php?user_id=<?=$user['user_id']?>" class="btn btn-primary btn-sm edit" title="Sửa"><i class="fas fa-edit"></i>
                             </td>
                         </tr>
                         <?php
                         }
                         ?>
-                        <!--<tr>
-                            <td width="10"><input type="checkbox" name="check2" value="2"></td>
-                            <td>#SX22837</td>
-                            <td>Trần Khả Ái</td>
-                            <td><img class="img-card-person" src="/img-anhthe/2.jpg" alt=""></td>
-                            <td>6 Nguyễn Lương Bằng, Tân Phú, Quận 7, Hồ Chí Minh</td>
-                            <td>22/12/1999</td>
-                            <td>Nữ</td>
-                            <td>0931342432</td>
-                            <td>Bán hàng</td>
-                            <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                        onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="10"><input type="checkbox" name="check3" value="3"></td>
-                            <td>#LO2871</td>
-                            <td>Phạm Thu Cúc</td>
-                            <td><img class="img-card-person" src="/img-anhthe/3.jpg" alt=""></td>
-                            <td>Số 3 Hòa Bình, Phường 3, Quận 11, Hồ Chí Minh </td>
-                            <td>02/06/1998</td>
-                            <td>Nữ</td>
-                            <td>0931491997</td>
-                            <td>Thu ngân</td>
-                            <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction()"><i
-                                        class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="10"><input type="checkbox"></td>
-                            <td>#SR28746</td>
-                            <td>Trần Anh Khoa</td>
-                            <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
-                            <td>19 Đường Nguyễn Hữu Thọ, Tân Hưng, Quận 7, Hồ Chí Minh </td>
-                            <td>18/02/1995</td>
-                            <td>Nam</td>
-                            <td>0916706633</td>
-                            <td>Tư vấn</td>
-                            <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction()"><i
-                                        class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="10"><input type="checkbox"></td>
-                            <td>#KJS276</td>
-                            <td>Nguyễn Thành Nhân</td>
-                            <td><img class="img-card-person" src="/img-anhthe/5.jpg" alt=""></td>
-                            <td>Số 13, Tân Thuận Đông, Quận 7, Hồ Chí Minh </td>
-                            <td>10/03/1996</td>
-                            <td>Nam</td>
-                            <td>0971038066</td>
-                            <td>Bảo trì</td>
-                            <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction()"><i
-                                        class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="10"><input type="checkbox"></td>
-                            <td>#BS76228</td>
-                            <td>Nguyễn Đặng Trọng Nhân</td>
-                            <td><img class="img-card-person" src="/img-anhthe/6.jpg" alt=""></td>
-                            <td>59C Nguyễn Đình Chiểu, Quận 3, Hồ Chí Minh </td>
-                            <td>23/07/1996</td>
-                            <td>Nam</td>
-                            <td>0846881155</td>
-                            <td>Dịch vụ</td>
-                            <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa" onclick="myFunction()"><i
-                                        class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal" data-target="#ModalUP"><i class="fas fa-edit"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="10"><input type="checkbox"></td>
-                            <td>#YUI21376</td>
-                            <td>Nguyễn Thị Mai</td>
-                            <td><img class="img-card-person" src="/img-anhthe/4.jpg" alt=""></td>
-                            <td>Đường Số 3, Tân Tạo A, Bình Tân, Hồ Chí Minh</td>
-                            <td>09/12/2000</td>
-                            <td>Nữ </td>
-                            <td>0836333037</td>
-                            <td>Tư vấn</td>
-                            <td><button class="btn btn-primary btn-sm trash" title="Xóa" onclick="myFunction()"><i
-                                        class="fas fa-trash-alt"></i>
-                                </button>
-                                <button class="btn btn-primary btn-sm edit" title="Sửa" id="show-emp" data-toggle="modal"
-                                        data-target="#ModalUP"><i class="fas fa-edit"></i>
-                                </button>
-                            </td>
-                        </tr>-->
 
                         </tbody>
                     </table>
@@ -304,18 +172,18 @@ MODAL
 -->
 
 <!-- Essential javascripts for application to work-->
-<script src="../js/jquery-3.2.1.min.js"></script>
+ <script src="../js/jquery-3.2.1.min.js"></script>
 <script src="../js/popper.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="src/jquery.table2excel.js"></script>
-<script src="../js/main.js"></script>
+<script src="../js/main.js"></script> 
 <!-- The javascript plugin to display page loading on top-->
-<script src="../js/plugins/pace.min.js"></script>
+ <script src="../js/plugins/pace.min.js"></script> 
 <!-- Page specific javascripts-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script> 
 <!-- Data table plugin-->
-<script type="text/javascript" src="../js/plugins/jquery.dataTables.min.js"></script>
+ <script type="text/javascript" src="../js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../js/plugins/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">$('#sampleTable').DataTable();</script>
 <script>
@@ -344,92 +212,7 @@ MODAL
     $('#all').click(function (e) {
         $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
         e.stopImmediatePropagation();
-    });
-
-    //EXCEL
-    // $(document).ready(function () {
-    //   $('#').DataTable({
-
-    //     dom: 'Bfrtip',
-    //     "buttons": [
-    //       'excel'
-    //     ]
-    //   });
-    // });
-
-
-    //Thời Gian
-    function time() {
-        var today = new Date();
-        var weekday = new Array(7);
-        weekday[0] = "Chủ Nhật";
-        weekday[1] = "Thứ Hai";
-        weekday[2] = "Thứ Ba";
-        weekday[3] = "Thứ Tư";
-        weekday[4] = "Thứ Năm";
-        weekday[5] = "Thứ Sáu";
-        weekday[6] = "Thứ Bảy";
-        var day = weekday[today.getDay()];
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        m = checkTime(m);
-        s = checkTime(s);
-        nowTime = h + " giờ " + m + " phút " + s + " giây";
-        if (dd < 10) {
-            dd = '0' + dd
-        }
-        if (mm < 10) {
-            mm = '0' + mm
-        }
-        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-            '</span>';
-        document.getElementById("clock").innerHTML = tmp;
-        clocktime = setTimeout("time()", "1000", "Javascript");
-
-        function checkTime(i) {
-            if (i < 10) {
-                i = "0" + i;
-            }
-            return i;
-        }
-    }
-    //In dữ liệu
-    var myApp = new function () {
-        this.printTable = function () {
-            var tab = document.getElementById('sampleTable');
-            var win = window.open('', '', 'height=700,width=700');
-            win.document.write(tab.outerHTML);
-            win.document.close();
-            win.print();
-        }
-    }
-    //     //Sao chép dữ liệu
-    //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-    // copyTextareaBtn.addEventListener('click', function(event) {
-    //   var copyTextarea = document.querySelector('.js-copytextarea');
-    //   copyTextarea.focus();
-    //   copyTextarea.select();
-
-    //   try {
-    //     var successful = document.execCommand('copy');
-    //     var msg = successful ? 'successful' : 'unsuccessful';
-    //     console.log('Copying text command was ' + msg);
-    //   } catch (err) {
-    //     console.log('Oops, unable to copy');
-    //   }
-    // });
-
-
-    //Modal
-    $("#show-emp").on("click", function () {
-        $("#ModalUP").modal({ backdrop: false, keyboard: false })
-    });
+    }); 
 </script>
 </body>
 

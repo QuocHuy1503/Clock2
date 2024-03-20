@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $search = "";
 //Lấy giá trị được search về với điều kiện $_GET['search'] tồn tại
 if(isset($_GET['search'])){
@@ -181,7 +183,7 @@ if(isset($_GET['search'])){
 <div class="container-fluid">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 " >
 
-        <a href="Main_menu.php" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <a href="../Layout/Main_menu.php" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
 <!--            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
 -->
 <!--            <i class="fa-brands fa-bootstrap fa-2xl"></i>-->
@@ -204,8 +206,15 @@ if(isset($_GET['search'])){
         </div>
 
         <div class="col-md-3 text-end">
-            <a type="button" class="btn btn-outline-primary me-2" href="../account/login.php">Login</a>
-            <a type="button" class="btn btn-primary" href="../account/register.php">Sign-up</a>
+            <?php
+            if(!isset($_SESSION['email'])){
+                ?>
+                <a type="button" class="btn btn-outline-primary me-2" href="../account/login.php">Login</a>
+                <a type="button" class="btn btn-primary" href="../account/register.php">Sign-up</a>
+            <?php }else{ ?>
+                <a type="button" class="btn btn-outline-primary me-2" href="../cart/index.php">Cart</a>   
+                <a type="button" class="btn btn-outline-primary me-2" href="../account/logout.php">Logout</a>   
+            <?php }?>
         </div>
     </header>
     <nav class="navbar navbar-expand-lg ">

@@ -26,7 +26,7 @@
         .btn-danger:focus{box-shadow: none}
         .cart i{margin-right: 10px}
     </style>
-    <script>
+    <!-- <script>
         function change_image(image){
 
             var container = document.getElementById("main-image");
@@ -36,19 +36,19 @@
         document.addEventListener("DOMContentLoaded", function(event) {
 
         });
-    </script>
+    </script> -->
 </head>
 <body>
 <?php
 include_once 'Header.php';
 include_once '../../connect/open.php';
-$clock_id = $_GET['clock_id'];
-$sql = "SELECT *, categories.name as cat_name FROM clock INNER JOIN categories ON clock.category_id = categories.id WHERE clock_id = '$clock_id'";
-$clock = mysqli_query($connect,$sql);
+$watch_id = $_GET['watch_id'];
+$sql = "SELECT *, categories.name as cat_name FROM watch INNER JOIN categories ON watch.category_id = categories.id WHERE watch_id = '$watch_id'";
+$watch = mysqli_query($connect,$sql);
 include_once '../../connect/close.php';
-if(mysqli_num_rows($clock) > 0) {
+if(mysqli_num_rows($watch) > 0) {
 // Use a while loop to iterate over each row
-while ($row = mysqli_fetch_assoc($clock)) {
+while ($row = mysqli_fetch_assoc($watch)) {
 ?>
 <div class="container-fluid mt-5 mb-5">
     <div class="row d-flex justify-content-center">
@@ -69,7 +69,7 @@ while ($row = mysqli_fetch_assoc($clock)) {
                                 </div>
                             </div>
                             <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand"><?=$row['cat_name']?></span>
-                                <h5 class="text-uppercase"><?=$row['clock_name']?></h5>
+                                <h5 class="text-uppercase"><?=$row['watch_name']?></h5>
                                 <div class="price d-flex flex-row align-items-center"> <span class="act-price">$20</span>
                                     <div class="ml-2"> <small class="dis-price">$59</small> <span>40% OFF</span> </div>
                                 </div>
@@ -78,7 +78,11 @@ while ($row = mysqli_fetch_assoc($clock)) {
                             <div class="sizes mt-5">
                                 <h6 class="text-uppercase">Size</h6> <label class="radio"> <input type="radio" name="size" value="S" checked> <span>S</span> </label> <label class="radio"> <input type="radio" name="size" value="M"> <span>M</span> </label> <label class="radio"> <input type="radio" name="size" value="L"> <span>L</span> </label> <label class="radio"> <input type="radio" name="size" value="XL"> <span>XL</span> </label> <label class="radio"> <input type="radio" name="size" value="XXL"> <span>XXL</span> </label>
                             </div>
-                            <div class="cart mt-4 align-items-center"> <button class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> </div>
+                            <div class="cart mt-4 align-items-center"> 
+                                <a class="btn btn-danger text-uppercase mr-2 px-4" href="../cart/add-to-cart.php?watch_id=<?=$row['watch_id']?>">Add to cart</a>
+                                 <!-- <i class="fa fa-heart text-muted"></i> 
+                                 <i class="fa fa-share-alt text-muted"></i>  -->
+                                </div>
                         </div>
                     </div>
                 </div>

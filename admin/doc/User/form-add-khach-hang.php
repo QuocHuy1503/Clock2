@@ -133,7 +133,7 @@
 </style>
 <!-- Navbar-->
 <?php
-include_once '../header-navbar.php';
+include_once '../layout/header-navbar.php';
 include_once '../../../connect/open.php';
 $sql = "SELECT * FROM user";
 $customer = mysqli_query($connect, $sql);

@@ -134,11 +134,11 @@
   </style>
   <?php
 include_once '../../../connect/open.php';
-$sql = "SELECT *, categories.name as category_name, categories.id as cate_id FROM clock INNER JOIN categories ON clock.category_id = categories.id";
-$clock = mysqli_query($connect,$sql);
+$sql = "SELECT *, categories.name as category_name, categories.id as cate_id FROM watch INNER JOIN categories ON watch.category_id = categories.id";
+$watch = mysqli_query($connect,$sql);
 $sql_categories = "SELECT * FROM categories";
 $categories = mysqli_query($connect,$sql_categories);
-include_once '../header-navbar.php';
+include_once '../layout/header-navbar.php';
 
 include_once '../../../connect/close.php'
   ?>
@@ -176,11 +176,11 @@ include_once '../../../connect/close.php'
               
               <div class="form-group col-md-3">
                 <label class="control-label">Tên sản phẩm</label>
-                <input class="form-control" type="text" name="clock_name">
+                <input class="form-control" type="text" name="watch_name">
               </div>
 
               <div class="form-group  col-md-3">
-                <label class="control-label">Năm xuất khẩu</label>
+                <label class="control-label">Thời gian xuất khẩu</label>
                 <input class="form-control" type="date" name="publication_year">
               </div>
               <div class="form-group  col-md-3">

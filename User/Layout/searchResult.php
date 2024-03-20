@@ -21,7 +21,7 @@ if(isset($_GET['search'])){
 //Khai báo số bản ghi 1 trang
 $recordOnePage = 10;
 //Query để lấy số bản ghi
-$sqlCountRecord = "SELECT COUNT(*) AS count_record FROM clock WHERE clock_name LIKE '%$search%'";
+$sqlCountRecord = "SELECT COUNT(*) AS count_record FROM watch WHERE watch_name LIKE '%$search%'";
 //Chạy query lấy số bản ghi
 $countRecords = mysqli_query($connect, $sqlCountRecord);
 //foreach để lấy số bản ghi
@@ -35,11 +35,17 @@ $page = 1;
 if(isset($_GET['page'])){
     $page = $_GET['page'];
 }
+
 //Tính bản ghi bắt đầu của trang
 include_once 'Header.php';
 $start = ($page - 1) * $recordOnePage;
-$sql= "SELECT * FROM clock WHERE (clock_name LIKE '%$search%')  LIMIT $start,$recordOnePage";
-$clock = mysqli_query($connect,$sql);
+$sql= "SELECT * FROM watch WHERE ( watch_name LIKE '%$search%') LIMIT $start,$recordOnePage";
+$watch = mysqli_query($connect,$sql);
+if (isset($_GET['id'])){
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM watch WHERE category_id = $id";
+    $watch = mysqli_query($connect,$sql);
+}
 include_once '../../connect/close.php';
 ?>
 <section class="section-products">
@@ -49,18 +55,18 @@ include_once '../../connect/close.php';
 
             <?php
             /*Vòng lặp để hiển thị tất cả sản phẩm - Loop for displaying all product*/
-            if(mysqli_num_rows($clock) > 0) {
+            if(mysqli_num_rows($watch) > 0) {
             // Use a while loop to iterate over each row
-            while ($row = mysqli_fetch_assoc($clock)) {
+            while ($row = mysqli_fetch_assoc($watch)) {
                 ?>
                 <div class="col-md-6 col-lg-4 col-xl-3">
-                    <a href="Product_detail.php?clock_id=<?= $row['clock_id']?>">
+                    <a href="Product_detail.php?watch_id=<?= $row['watch_id']?>">
                         <div class="single-product">
                             <div class="part-1">
-                                <img src="../../Asset/img/<?= $row['image']?>" style="">
+                                <img src="../../Asset/img/<?= $row['image']?>" style="max-width: 100%;height:auto">
                             </div>
                             <div class="part-2">
-                                <h3 class="product-title"><?= $row['clock_name']?></h3>
+                                <h3 class="product-title"><?= $row['watch_name']?></h3>
                                 <h4 class="product-old-price">$<?= $row['price'] + 40?></h4>
                                 <h4 class="product-price">$<?= $row['price']?></h4>
                             </div>

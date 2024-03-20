@@ -13,7 +13,7 @@ if(isset($_GET['search'])){
 //Khai báo số bản ghi 1 trang
 $recordOnePage = 8;
 //Query để lấy số bản ghi
-$sqlCountRecord = "SELECT COUNT(*) AS count_record FROM clock WHERE clock_name LIKE '%$search%'";
+$sqlCountRecord = "SELECT COUNT(*) AS count_record FROM watch WHERE watch_name LIKE '%$search%'";
 //Chạy query lấy số bản ghi
 $countRecords = mysqli_query($connect, $sqlCountRecord);
 //foreach để lấy số bản ghi
@@ -30,8 +30,8 @@ if(isset($_GET['page'])){
 //Tính bản ghi bắt đầu của trang
 include_once 'Header.php';
 $start = ($page - 1) * $recordOnePage;
-$sql = "SELECT * FROM clock WHERE clock_name LIKE '%$search%' LIMIT $start,$recordOnePage";
-$clock = mysqli_query($connect,$sql);
+$sql = "SELECT * FROM watch WHERE watch_name LIKE '%$search%' LIMIT $start,$recordOnePage";
+$watch = mysqli_query($connect,$sql);
 include_once '../../connect/close.php';
 include_once 'Header.php'
 ?>
@@ -40,6 +40,15 @@ include_once 'Header.php'
         max-width: 1092px; /* Adjust the max-width as needed */
         margin: auto; /* Center the container on the page */
     }
+    .carousel-item img {
+    height: 100%;
+    }
+    .carousel-item img {
+    object-fit: cover; /* Or object-fit: contain; */
+    height: 100%;
+    width: 100%; /* Optional to ensure full width */
+    }      
+    
 </style>
 <!--Slideshow ad-->
 <div class="carousel-container">
@@ -78,18 +87,18 @@ include_once 'Header.php'
 
             <?php
             /*Vòng lặp để hiển thị tất cả sản phẩm - Loop for displaying all product*/
-            foreach ($clock as $cl){
+            foreach ($watch as $wa){
             ?>
                 <div class="col-md-6 col-lg-4 col-xl-3">
-                    <a href="Product_detail.php?clock_id=<?= $cl['clock_id']?>">
+                    <a href="Product_detail.php?watch_id=<?= $wa['watch_id']?>">
                     <div class="single-product">
                         <div class="part-1">
-                         <img src="../../Asset/img/<?= $cl['image']?>">
+                         <img src="../../Asset/img/<?= $wa['image']?>" style="max-width: 100%; height: auto;">
                         </div>
                         <div class="part-2">
-                            <h3 class="product-title"><?= $cl['clock_name']?></h3>
-                            <h4 class="product-old-price">$<?= $cl['price'] + 40?></h4>
-                            <h4 class="product-price">$<?= $cl['price']?></h4>
+                            <h3 class="product-title"><?= $wa['watch_name']?></h3>
+                            <h4 class="product-old-price">$<?= $wa['price'] + 40?></h4>
+                            <h4 class="product-price">$<?= $wa['price']?></h4>
                         </div>
                     </div>
                     </a>

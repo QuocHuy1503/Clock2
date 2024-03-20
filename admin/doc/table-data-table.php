@@ -31,7 +31,7 @@
       <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item active"><a href="#"><b>Danh sách nhân viên</b></a></li>
       </ul>
-      <div id="clock"></div>
+      <div id="watch"></div>
     </div>
 
     <div class="row">

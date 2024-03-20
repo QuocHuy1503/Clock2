@@ -34,7 +34,7 @@
           <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><a href="#"><b>POS bán hàng</b></a></li>
           </ul>
-          <div id="clock"></div>
+          <div id="watch"></div>
         </div>
       </div>
     </div>
