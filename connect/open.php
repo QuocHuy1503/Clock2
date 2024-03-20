@@ -1,4 +1,4 @@
  <?php
 
- $connect = mysqli_connect('localhost', 'watch', '', 'watch');
+ $connect = mysqli_connect('localhost', 'root', '', 'watch');
 ?>

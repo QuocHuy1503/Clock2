@@ -32,6 +32,8 @@ include_once 'Header.php';
 $start = ($page - 1) * $recordOnePage;
 $sql = "SELECT * FROM watch WHERE watch_name LIKE '%$search%' LIMIT $start,$recordOnePage";
 $watch = mysqli_query($connect,$sql);
+$sqlUser = "SELECT * FROM user";
+
 include_once '../../connect/close.php';
 include_once 'Header.php'
 ?>

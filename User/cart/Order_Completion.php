@@ -23,7 +23,7 @@
         <div class="text-center">
             <h1>Cảm ơn vì đã đặt hàng</h1>
             <p>Quay về trang chủ để tiếp tục tìm kiếm sản phẩm mong muốn</p>
-            <button class="btn btn-outline-success"><a href="../Layout/Main.php" style="text-decoration: none">Trang chủ</a></button>
+            <button class="btn btn-outline-success"><a href="../Layout/Main_menu.php" style="text-decoration: none">Trang chủ</a></button>
         </div>
     </div>
 </body>

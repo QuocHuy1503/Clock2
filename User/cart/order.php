@@ -1,26 +1,26 @@
 <?php
 session_start();
 //Kiểm tra đã login chưa
-if(isset($_SESSION['id'])){
+if(isset($_SESSION['email'])){
     //Lấy ngày hiện tại
     $dateBuy = date('Y-m-d');
     //Lấy status (status mặc định là 0 tương ứng với trạng thái chờ xác nhận của đơn hàng)
     $status = 0;
     //Lấy id của customer
-    $customer_id = $_SESSION['id'];
+    $user_id = $_SESSION['user_id'];
     //Lấy tên và số điện thoại và địa chỉ người nhận
     // $receiver_name = $_POST['receiver_name'];
     // $receiver_phone = $_POST['receiver_phone'];
     // $receiver_address = $_POST['receiver_address'];
     //Mở kết nối
-    include_once '../../Connects/open.php';
+    include_once '../../connect/open.php';
     //Query thêm dữ liệu lên bảng orders
-    // $sqlInsertOrder = "INSERT INTO orders(date_buy, status, customer_id,receiver_name,receiver_phone,receiver_address) VALUES ('$dateBuy', '$status', '$customer_id ', '$receiver_name','$receiver_phone','$receiver_address' )";
-    $sqlInsertOrder = "INSERT INTO orders(date_buy, status, customer_id) VALUES ('$dateBuy', '$status', '$customer_id ', '$receiver_name','$receiver_phone','$receiver_address' )";
+    // $sqlInsertOrder = "INSERT INTO orders(date_buy, status, user_id,receiver_name,receiver_phone,receiver_address) VALUES ('$dateBuy', '$status', '$user_id ', '$receiver_name','$receiver_phone','$receiver_address' )";
+    $sqlInsertOrder = "INSERT INTO orders(order_date,order_status, user_id) VALUES ('$dateBuy', '$status', '$user_id ')";
     //Chạy query insert dữ liệu lên bảng orders
     mysqli_query($connect, $sqlInsertOrder);
     //query lấy order_id lớn nhất của customer đang login hiện tại
-    $sqlMaxOrderId = "SELECT MAX(id) AS max_order_id FROM orders WHERE customer_id = '$customer_id'";
+    $sqlMaxOrderId = "SELECT MAX(order_id) AS max_order_id FROM orders WHERE user_id = '$user_id'";
     //Chạy query lấy max_order_id
     $maxOrderIds = mysqli_query($connect, $sqlMaxOrderId);
     //foreach để lấy max_order_id
@@ -29,16 +29,16 @@ if(isset($_SESSION['id'])){
     }
     //Lấy giỏ hàng về
     $cart = $_SESSION['cart'];
-    foreach ($cart as $book_id => $quantity){
+    foreach ($cart as $watch_id => $quantity){
         //Lấy dữ liệu để insert lên bảng order_details
         //Query để lấy price của product
-        $sqlSelectPrice = "SELECT price FROM books WHERE id = '$book_id'";
+        $sqlSelectPrice = "SELECT price FROM watch WHERE watch_id = '$watch_id'";
         //Chạy query lấy price của product
         $productPrices = mysqli_query($connect, $sqlSelectPrice);
         //foreach để lấy price
         foreach ($productPrices as $productPrice){
             $price = $productPrice['price'];
-            $sqlInsertOrderDetail = "INSERT INTO order_details(book_id,order_id,price,quantity) VALUES ('$book_id','$order_id','$price','$quantity')";
+            $sqlInsertOrderDetail = "INSERT INTO order_details(watch_id,order_id,sold_quantity,subtotal) VALUES ('$watch_id','$order_id','$price','$quantity')";
             //Chạy query insert order_detail
             mysqli_query($connect, $sqlInsertOrderDetail);
         }

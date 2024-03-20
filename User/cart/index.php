@@ -43,9 +43,9 @@ $carts = $_SESSION['cart'];
     <table width="100%">
         <tr>
             <th style="background: none">STT</th>
-            <th style="background: none">Ảnh và tên sản phẩm</th>
-            <th style="background: none">Đơn giá</th>
-            <th style="background: none">Số lượng</th>
+            <th style="background: none;text-align: center">Thông tin về mặt hàng</th>
+            <!-- <th style="background: none">Đơn giá</th> -->
+            <!-- <th style="background: none">Số lượng</th> -->
             <th style="background: none">Tổng tiền của sản phẩm này</th>
             <th style="background: none">Hành động</th>
         </tr>
@@ -54,25 +54,34 @@ $carts = $_SESSION['cart'];
         //Sql lấy thông tin sp theo id
         $sql = "SELECT * FROM watch WHERE watch_id = '$id'";
         //Chạy query
+        $email = $_SESSION['email'];
         $watches = mysqli_query($connect, $sql);
+        $sqlUser = "SELECT * FROM user WHERE email = '$email' ";
+        $user = mysqli_query($connect,$sqlUser);
         foreach ($watches as $watches){
         ?>
         <tbody >
         <tr>
             <td><?= $watches['watch_id']?></td>
-            <td>
-                <div style="width: 100%;">
-                <img src="../../Asset/img/<?= $watches['image'] ?>" width="120px" height="120px" class="hinhdaidien">
-                </div>
-
-                <div style="">
-                    <span style="font-size: 1.5rem" ><?= $watches['watch_name']; ?> </span>
+            <td >
+                <div style="width: 100%" class="d-flex justify-content-around">
+                    <img src="../../Asset/img/<?= $watches['image'] ?>" width="100px" height="100px" class="hinhdaidien">
+                        <div class="d-flex flex-column justify-content-around">
+                        <span style="font-size: 1rem" ><?= $watches['watch_name']; ?> </span>
+                            <div class="d-flex ">
+                                <?php echo number_format($watches['price'], 0, ',', '.'); ?>₫ x
+                                <!-- <input type="number" value="<?= $quantity; ?>" name="quantity[<?= $id; ?>]" min="1"> -->
+                                <div class="col-auto">
+                                <input type="number" value="<?= $quantity; ?>" name="quantity[<?= $id; ?>]" min="1" 
+                                id="inputPassword6" style="width: 50%;height: calc(1em + 0.4rem + 2px);" class="form-control" aria-describedby="passwordHelpInline">
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </td>
-            <td><?php echo number_format($watches['price'], 0, ',', '.'); ?>₫</td>
-            <td>
+            <!-- <td>
                 <input type="number" value="<?= $quantity; ?>" name="quantity[<?= $id; ?>]" min="1">
-            </td>
+            </td> -->
             <td>
                 <?php
                 //Tính thành tiền của từng sp có trong trong cart
@@ -132,25 +141,14 @@ $carts = $_SESSION['cart'];
 if (!$count_money == 0){
 ?>
     </div>
-    <form action="order.php" method="post">
+    <!-- <form action="order.php" method="post">
     <div style="background: #fafafa;justify-content: space-around;align-content: space-around;flex-direction: column;width: 400px;height: 485px">
         <div style="height: 45px;display: flex;justify-content: center;padding-top: 8px">
             <span style="font-weight: bold">Điền thông tin người nhận</span>
-        </div>
-        <form action="order.php" method="post">
-       <!-- <div style="">
-            <label>Nguoi Nhan</label><br>
-            <input type="text" placeholder="Your Name" name="receiver_name" class="icon-left" style="">
-        </div>
-        <div style="">
-            <label>So Dien Thoai</label>
-            <input type="number" placeholder="Your phonenumber" name="receiver_phone" class="icon-left">
-        </div>
-        <div style="">
-            <label>Dia Chi</label><br>
-            <input type="tel" placeholder="Your Address" name="receiver_address" class="icon-left">
         </div>-->
-            <div class="form-group">
+        <div style="width: 40%;">
+        <form action="order.php" method="post">
+            <!--<div class="form-group">
                 <label for="exampleInputEmail1">Người nhận hàng</label>
                 <input type="text" style="height: 50px;font-size: 1.6rem" class="form-control" id="exampleInputEmail1" name="receiver_name" required aria-describedby="emailHelp" placeholder="Nhập Tên">
             </div>
@@ -162,10 +160,31 @@ if (!$count_money == 0){
                 <label for="exampleInputPassword1">Địa chỉ</label>
                 <input type="tel" style="height: 50px;font-size: 1.6rem" class="form-control" name="receiver_address" required id="exampleInputPassword1" placeholder="Nhập địa chỉ">
             </div>
-            <button class="btn btn-primary" style="margin: 125px 145px">Đặt hàng</button>
-        <!--Boostrap-->
+            <button class="btn btn-primary" style="margin: 125px 145px">Đặt hàng</button>  -->
+            <?php
+            foreach($user as $u){
+            ?>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="hidden" name="user_id">
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?=$u['email']?>">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="phone" value="<?=$u['phone']?>">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Address</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="phone" value="<?=$u['address']?>">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <?php
+            }
+            ?>
         </form>
-    </div>
+        </div>
+    <!-- </div> -->
 </div>
 <?php
 include_once '../Layout/Footer.php';
@@ -173,9 +192,10 @@ include_once '../Layout/Footer.php';
 }else
     {
 ?>
-<div style="display: flex;justify-content: center;flex-direction: row">
-    <img src="../../image/empty-cart.webp" style="margin-bottom: 100px">
-
+<div style="display: flex;justify-content: center;flex-direction: row; height: 100%;">
+        <div>
+            <p>There is nothing</p>
+        </div>
 </div>
 <?php
     include_once '../Layout/Footer.php';

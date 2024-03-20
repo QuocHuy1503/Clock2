@@ -58,8 +58,7 @@ while ($row = mysqli_fetch_assoc($watch)) {
                     <div class="col-md-6">
                         <div class="images p-3">
                             <div class="text-center p-4"> <img id="main-image" src="../../Asset/img/<?=$row['image']?>" width="250" /> </div>
-<!--                            <div class="thumbnail text-center"> <img onclick="change_image(this)" src="../../Asset/img/download.jfif" width="70"> <img onclick="change_image(this)" src="../../Asset/img/images.jfif" width="70"> </div>
--->                        </div>
+                </div>
                     </div>
                     <div class="col-md-6">
                         <div class="product p-4">
@@ -76,13 +75,21 @@ while ($row = mysqli_fetch_assoc($watch)) {
                             </div>
                             <p class="about"><?= $row['description']?></p>
                             <div class="sizes mt-5">
-                                <h6 class="text-uppercase">Size</h6> <label class="radio"> <input type="radio" name="size" value="S" checked> <span>S</span> </label> <label class="radio"> <input type="radio" name="size" value="M"> <span>M</span> </label> <label class="radio"> <input type="radio" name="size" value="L"> <span>L</span> </label> <label class="radio"> <input type="radio" name="size" value="XL"> <span>XL</span> </label> <label class="radio"> <input type="radio" name="size" value="XXL"> <span>XXL</span> </label>
+                                <h6 class="text-uppercase">Size</h6> <label class="radio"> 
+                                    <input type="radio" name="size" value="S" checked> 
+                                    <span>S</span> </label> <label class="radio"> 
+                                    <input type="radio" name="size" value="M"> 
+                                    <span>M</span> </label> <label class="radio"> 
+                                    <input type="radio" name="size" value="L"> 
+                                    <span>L</span> </label> <label class="radio"> 
+                                    <input type="radio" name="size" value="XL">
+                                    <span>XL</span> </label> <label class="radio"> 
+                                    <input type="radio" name="size" value="XXL">
+                                    <span>XXL</span> </label>
                             </div>
                             <div class="cart mt-4 align-items-center"> 
                                 <a class="btn btn-danger text-uppercase mr-2 px-4" href="../cart/add-to-cart.php?watch_id=<?=$row['watch_id']?>">Add to cart</a>
-                                 <!-- <i class="fa fa-heart text-muted"></i> 
-                                 <i class="fa fa-share-alt text-muted"></i>  -->
-                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

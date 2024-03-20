@@ -232,7 +232,7 @@ if(isset($_GET['search'])){
                 foreach ($categories as $category){
                 ?>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="searchResult.php?id=<?=$category['id']?>"><?=$category['name']?></a>
+                    <a class="nav-link active" aria-current="page" href="../Layout/searchResult.php?id=<?=$category['id']?>"><?=$category['name']?></a>
                 </li>
                 <?php
                 /*end vong lap*/
