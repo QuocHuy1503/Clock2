@@ -1,133 +1,246 @@
-<?php
-//Cho phép làm việc với session
-session_start();
-//Kiểm tra đã tồn tại số đth trên session hay chưa, nếu chưa tồn tại thì cho quay về account
-if(!isset($_SESSION['email'])){
-    //Quay vá» trang login
-    header("Location:../Account/login.php");
-}
-?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" type="text/css" href="../bootstrap.min.css/bootstrap.min.css">
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <link rel="stylesheet" href="../assets/css/grid.css">
-    <link rel="stylesheet" href="../assets/css/responsive.css">
-    <link rel="stylesheet" href="../assets/css/manager.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-6.4.0-web/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap"
-          rel="stylesheet">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Edit Order </title>
+<head>
+    <title>Sửa đơn hàng</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <!-- or -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
 </head>
-<body>
+
+<body onload="time()" class="app sidebar-mini rtl">
 <?php
 //Lấy id của sp
-$id = $_GET['id'];
+$order_id = $_GET['order_id'];
 //Mo ket noi
 include_once "../../../connect/open.php";
 //Query
-$sql = "SELECT order_details.watch_id, order_details.order_id, order_details.subtotal, order_details.sold_quantity,
-		        watch.image AS image, watch_name , watch.description,
-		       user_name, user.phone ,user.address,
-		        SUM(order_details.subtotal*order_details.quantity) AS TongDonHang
-        FROM orders
-        INNER JOIN books ON books.id = order_details.book_id
-        INNER JOIN order_detail ON orders.order_id = order_details.order_id
-        INNER JOIN user ON orders.user_id = user.user_id
-        WHERE order_details.order_id = '$id'";
+$sql = "SELECT * FROM order_details
+        INNER JOIN watch ON watch.watch_id = order_details.watch_id
+        INNER JOIN orders ON orders.order_id = order_details.order_id
+         left join  user on user.user_id = orders.user_id
+        WHERE order_details.order_id = '$order_id'";
 //Chạy query cua $sql chinh
 $orders = mysqli_query($connect, $sql);
+include_once '../header-navbar.php';
 // Chay query cua $sqlOrder de tim ai order
 
 //Đóng kết nối
 include_once '../../../connect/close.php';
 ?>
-                <h1 class="page-header">
-                    <?php
-                    foreach ($orders as $order){
-                        ?>
-                        <h1>Tên khách hàng: <?= $order['user_name'] ?></h1>
-                        <h1>Số điện thoại: <?= $order['user_phone'] ?></h1>
-                        <h1>Địa chỉ: <?= $order['user_address'] ?></h1>
-                        <?php
-                    }
-                    ?>
-                </h1>
+<main class="app-content">
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
+        </ul>
+        <div id="clock"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <div class="row element-button">
+                        <div class="col-sm-2">
+                        </div>
 
-                <div class="list-member">
-                    <div class="table-member">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th style="font-size: 1.5rem">
-                                    <div class="use-member">Tên Sản Phẩm</div>
-                                    <div class="member-cell"></div>
-                                </th>
-                                <th style="font-size: 1.5rem">
-                                    <div class="use-member">Ảnh Sản Phẩm</div>
-                                    <div class="member-cell"></div>
-                                </th>
-                                <th style="font-size: 1.5rem">
-                                    <div class="use-member">Số lượng order</div>
-                                    <div class="member-cell"></div>
-                                </th>
-                                <th style="font-size: 1.5rem">
-                                    <div class="use-member">Thông tin mô tả sản phẩm</div>
-                                    <div class="member-cell"></div>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <?php  foreach ($orders as $order) {?>
-                                    <td style="font-size: 1.5rem"> <?= $order['watch_name']?></td>
-                                    <td style="font-size: 1.5rem"><img width="180px" src="../../images/<?= $order['image']?>"></td>
-                                    <td style="font-size: 1.5rem"><?= $order['watch.quantity']?></td>
-                                    <td style="font-size: 1.5rem"><?= $order['watch.description']?></td>
-                                <? }foreach ($orders as $order){?>
-                            </tr>
-                            <?php
-                            }
-                            ?>
-                            <tr>
-                                <td style="font-size: 1.5rem" colspan="10">Tổng giá đơn hàng: <?= $order['TongDonHang']?>đ</td>
-                            </tr>
-                            <tr>
-                                <td colspan="10">
-                                    <form method="post" action="process.php">
-                                        <input type="hidden" name="id" value="<?= $order['order_id']; ?>">
-                                        <select class="status" name="status" style="width: 150px;margin-left: 22px;padding:5px">
-                                            <option value="0"<?php if($order['order_status'] == 0 ){echo "SELECTED";}?>> Pending </option>
-                                            <option value="1"<?php if($order['order_status'] == 1 ){echo "SELECTED";}?>> Approved </option>
-                                            <option value="2"<?php if($order['order_status'] == 2 ){echo "SELECTED";}?>> Delivery </option>
-                                            <option value="3"<?php if($order['order_status'] == 3 ){echo "SELECTED";}?>> Completed </option>
-                                            <option value="4"<?php if($order['order_status'] == 4 ){echo "SELECTED";}?>> Canceled </option>
-                                        </select>
-                                        <button type="submit"  class="add-member" style="margin: 20px 42%; ">
-                                            OK
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+
+
+                            <table class="table table-hover table-bordered" id="sampleTable">
+    <thead>
+    <tr>
+        <th width="10"><input type="checkbox" id="all"></th>
+        <th>Tên khách hàng</th>
+        <th>Số điện thoại</th>
+        <th>Địa chỉ</th>
+        <th>Tên sản phẩm</th>
+        <th>Số lượng order</th>
+        <th>Thông tin sản phẩm</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <?php
+        foreach ($orders as $order)
+        ?>
+        <td width="10"><input type="checkbox" name="check1" value="1"></td>
+        <td><?= $order['user_name'] ?></td>
+        <td><?= $order['phone'] ?></td>
+        <td><?= $order['address']?></td>
+        <td><?= $order['watch_name']?></td>
+        <td><?= $order['sold_quantity']?></td>
+        <td><?= $order['description']?></td>
+    <tr>
+        <td style="font-size: 1.5rem" colspan="10">Tổng giá đơn hàng: <?= $order['subtotal']?>$</td>
+    </tr>
+    <tr>
+        <td colspan="10">
+            <form method="post" action="process.php">
+                <input type="hidden" name="order_id" value="<?= $order['order_id']; ?>">
+                <select class="status" name="order_status" style="width: 150px;margin-left: 22px;padding:5px">
+                    <option value="0"<?php if($order['order_status'] == 0 ){echo "SELECTED";}?>> Pending </option>
+                    <option value="1"<?php if($order['order_status'] == 1 ){echo "SELECTED";}?>> Approved </option>
+                    <option value="2"<?php if($order['order_status'] == 2 ){echo "SELECTED";}?>> Delivery </option>
+                    <option value="3"<?php if($order['order_status'] == 3 ){echo "SELECTED";}?>> Completed </option>
+                    <option value="4"<?php if($order['order_status'] == 4 ){echo "SELECTED";}?>> Canceled </option>
+                </select>
+                <button type="submit"  class="add-member" style="margin: 20px 42%; ">
+                                            Done
+                </button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
+
+<!-- Essential javascripts for application to work-->
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="src/jquery.table2excel.js"></script>
+<script src="../js/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="../js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<!-- Data table plugin-->
+<script type="text/javascript" src="../js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
+<script>
+    function deleteRow(r) {
+        var i = r.parentNode.parentNode.rowIndex;
+        document.getElementById("myTable").deleteRow(i);
+    }
+    jQuery(function () {
+        jQuery(".trash").click(function () {
+            swal({
+                title: "Cảnh báo",
+
+                text: "Bạn có chắc chắn là muốn xóa đơn hàng này?",
+                buttons: ["Hủy bỏ", "Đồng ý"],
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Đã xóa thành công.!", {
+
+                        });
+                    }
+                });
+        });
+    });
+    oTable = $('#sampleTable').dataTable();
+    $('#all').click(function (e) {
+        $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
+        e.stopImmediatePropagation();
+    });
+
+    //EXCEL
+    // $(document).ready(function () {
+    //   $('#').DataTable({
+
+    //     dom: 'Bfrtip',
+    //     "buttons": [
+    //       'excel'
+    //     ]
+    //   });
+    // });
+
+
+    //Thời Gian
+    function time() {
+        var today = new Date();
+        var weekday = new Array(7);
+        weekday[0] = "Chủ Nhật";
+        weekday[1] = "Thứ Hai";
+        weekday[2] = "Thứ Ba";
+        weekday[3] = "Thứ Tư";
+        weekday[4] = "Thứ Năm";
+        weekday[5] = "Thứ Sáu";
+        weekday[6] = "Thứ Bảy";
+        var day = weekday[today.getDay()];
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        nowTime = h + " giờ " + m + " phút " + s + " giây";
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+        today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+        tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+            '</span>';
+        document.getElementById("clock").innerHTML = tmp;
+        clocktime = setTimeout("time()", "1000", "Javascript");
+
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    }
+    //In dữ liệu
+    var myApp = new function () {
+        this.printTable = function () {
+            var tab = document.getElementById('sampleTable');
+            var win = window.open('', '', 'height=700,width=700');
+            win.document.write(tab.outerHTML);
+            win.document.close();
+            win.print();
+        }
+    }
+    //     //Sao chép dữ liệu
+    //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+    // copyTextareaBtn.addEventListener('click', function(event) {
+    //   var copyTextarea = document.querySelector('.js-copytextarea');
+    //   copyTextarea.focus();
+    //   copyTextarea.select();
+
+    //   try {
+    //     var successful = document.execCommand('copy');
+    //     var msg = successful ? 'successful' : 'unsuccessful';
+    //     console.log('Copying text command was ' + msg);
+    //   } catch (err) {
+    //     console.log('Oops, unable to copy');
+    //   }
+    // });
+
+
+    //Modal
+    $("#show-emp").on("click", function () {
+        $("#ModalUP").modal({ backdrop: false, keyboard: false })
+    });
+</script>
+</body>
+
+</html>
 </body>
 </html>
 

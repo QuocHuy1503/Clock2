@@ -1,7 +1,3 @@
-<?php
-session_start();
-
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,78 +19,41 @@ session_start();
           rel="stylesheet">
     <title>Cart</title>
 
+
 </head>
 <body>
 <?php
 include_once '../../../connect/open.php';
-$sql = "SELECT * FROM orders INNER JOIN order_details ON orders.order_id = order_details.order_id INNER JOIN user ON orders.user_id = user.user_id";
+$sql = "SELECT * FROM orders INNER JOIN user ON orders.user_id = user.user_id
+INNER JOIN order_details ON orders.order_id = order_details.order_id
+left join watch on order_details.watch_id = watch.watch_id";
 $orders = mysqli_query($connect,$sql);
 include_once '../../../connect/close.php';
 ?>
-<!--<a href="../Account/Logout.php">Logout</a>
-<a href="../Layout/Manager.php">Return To Manager</a>
-<table cellspacing="0" cellpadding="0" border="1">
-    <tr>
-        <th>Orders ID</th>
-        <th>Orders Date</th>
-        <th>Customer ID</th>
-        <th>Status</th>
-        <th>Orders Details</th>
-    </tr>
-
-        <?php
-/*        //Sql lấy thông tin sp theo id
-        foreach ($orders as $order){
-        */?>
-                <tr>
-        <td><?php /*= $order['id'] */?></td>
-        <td><?php /*= $order['date_buy']*/?></td>
-        <td><?php /*= $order['cus_name']*/?></td>
-        <td>
-            <?php
-/*            if ($order['status'] == 0){
-                echo "Pending";
-            }
-            elseif ($order['status'] == 1 ){
-                echo "Delivering";
-            }
-            elseif ($order['status'] == 2 ){
-                echo "Completed";
-            }
-            elseif ($order['status'] == 3 ){
-                echo "Canceled";
-            }
-            */?>
-        </td>
-        <td>
-            <a href="order_details.php?id=<?php /*= $order['id'] */?>"><i class="fa-solid fa-book"></i></a>
-        </td>
-        <td>
-            <a href="Confirm.php?id=<?php /*= $order['id'] */?>"><i class="fa-solid fa-car fa-lg"></i></a>
-        </td>-->
-
-<?php
-/*        }
-        */?>
 <div class="grid">
     <div class="row sm-gutter ">
         <div class="col l-3">
             <div class="menu-right">
+
                 <h1 class="page-header">Danh sách đơn hàng </h1>
                     <div class="table-member">
-                        <table>
+                        <table width="100%" border="1px" cellpadding="0" cellspacing="0">
                             <thead>
                             <tr>
-                                <th style="font-size: 1.5rem">
+                                <th >
                                     <div class="use-member">ID</div>
                                     <div class="member-cell"></div>
                                 </th>
-                                <th style="font-size: 1.5rem">
+                                <th width="20%">
                                     <div class="use-member">Ngày mua</div>
                                     <div class="member-cell"></div>
                                 </th>
                                 <th style="font-size: 1.5rem">
                                     <div class="use-member">Tên Khách Hàng</div>
+                                    <div class="member-cell"></div>
+                                </th>
+                                <th style="font-size: 1.5rem">
+                                    <div class="use-member">Địa chỉ</div>
                                     <div class="member-cell"></div>
                                 </th>
                                 <th style="font-size: 1.5rem">
@@ -115,6 +74,7 @@ include_once '../../../connect/close.php';
                                     <td style="font-size: 1.5rem"><?= $order['order_id'] ?></td>
                                     <td style="font-size: 1.5rem"><?= $order['order_date']?></td>
                                     <td style="font-size: 1.5rem"><?= $order['user_name']?></td>
+                                    <td style="font-size: 1.5rem"><?= $order['address']?></td>
                                     <td style="font-size: 1.5rem">
                                         <?php
                                         if ($order['order_status'] == 0){
@@ -135,17 +95,8 @@ include_once '../../../connect/close.php';
                                         ?>
                                     </td>
                                     <td>
-                                        <div class="add-member" style="margin-top: 20px;width: 80%;">
-                                            <ul class="quanli-icon-title">
-                                                <li>
-                                                    <a href="order_details.php?id=<?= $order['order_id'] ?>"><i class="fa-solid fa-book"></i></a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <a href="order_detail.php?order_id=<?= $order['order_id'] ?>">VIEW</a>
                                     </td>
-                                    <!-- <td>
-                                            <a href="Confirm.php?id=<?php /*= $order['id']*/?>"><i class="fa-solid fa-car fa-lg"></i></a>
-                                        </td>-->
                                 </tr>
                                 <?php
                             }
