@@ -1,8 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../account/login.php");
-}
 
 //lay du lieu
 $user_id = $_SESSION['user_id'];
@@ -14,10 +11,10 @@ $address = $_POST['address'];
 include_once("../../connect/open.php");
 
 $sql = "UPDATE user SET user_name = '$user_name', email = '$email', phone = '$phone', 
-                                 gender = '$gender', address = '$address'
+                                 address = '$address'
                             WHERE user_id = '$user_id'";
 mysqli_query($connect, $sql);
 include_once '../../connect/close.php';
 
 $_SESSION['update_profile'] = 1;
-header("Location: index.php");
+header("Location: index.php?email=$email");

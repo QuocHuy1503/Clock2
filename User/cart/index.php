@@ -21,7 +21,7 @@ if (!isset($_SESSION['email'])){
     <link href="../assets/js/main.js" rel="stylesheet" >
     <link href="../assets/css/app.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>Cart</title>
+    <title>My Cart</title>
     <style>
     </style>
 </head>
@@ -54,9 +54,10 @@ $carts = $_SESSION['cart'];
         //Sql lấy thông tin sp theo id
         $sql = "SELECT * FROM watch WHERE watch_id = '$id'";
         //Chạy query
+
         $email = $_SESSION['email'];
         $watches = mysqli_query($connect, $sql);
-        $sqlUser = "SELECT * FROM user WHERE email = '$email' ";
+        $sqlUser = "SELECT * FROM user WHERE email = '$email'";
         $user = mysqli_query($connect,$sqlUser);
         foreach ($watches as $watches){
         ?>
@@ -69,11 +70,11 @@ $carts = $_SESSION['cart'];
                         <div class="d-flex flex-column justify-content-around">
                         <span style="font-size: 1rem" ><?= $watches['watch_name']; ?> </span>
                             <div class="d-flex ">
-                                <?php echo number_format($watches['price'], 0, ',', '.'); ?>₫ x
+                                <?php echo number_format($watches['price'], 0, ',', '.'); ?>$ x
                                 <!-- <input type="number" value="<?= $quantity; ?>" name="quantity[<?= $id; ?>]" min="1"> -->
                                 <div class="col-auto">
                                 <input type="number" value="<?= $quantity; ?>" name="quantity[<?= $id; ?>]" min="1" 
-                                id="inputPassword6" style="width: 50%;height: calc(1em + 0.4rem + 2px);" class="form-control" aria-describedby="passwordHelpInline">
+                                id="inputPassword6" style="width: 80%;height: calc(1em + 1rem + 5.5px);" class="form-control" aria-describedby="passwordHelpInline">
                                 </div>
                             </div>
                         </div>
@@ -88,11 +89,11 @@ $carts = $_SESSION['cart'];
                 $money = $watches['price'] * $quantity;
                 //Tính tổng tiền của các sp có trong trong cart
                 $count_money += $money;
-                echo number_format($money, 0, ',', '.'); ?>₫
+                echo number_format($money, 0, ',', '.'); ?>$
             </td>
             <td>
                 <!-- Nút xóa, bấm vào sẽ xóa thông tin dựa vào khóa chính `sp_ma` -->
-                <a href="delete-one-product-in-cart.php?id=<?= $id ?>" class="btn btn-danger btn-delete-sanpham">
+                <a href="delete-one-product-in-cart.php?watch_id=<?= $id ?>" class="btn btn-danger btn-delete-sanpham">
                     <i class="fa fa-trash" aria-hidden="true"></i> Xóa
                 </a>
             </td>
@@ -105,7 +106,7 @@ $carts = $_SESSION['cart'];
             <td colspan="7">
                 <?php
                 if(!$count_money==0){
-                echo 'Tổng tiền: ' . number_format($count_money,0,',',',').'đ';
+                echo 'Tổng tiền: ' . number_format($count_money,0,',',',').'$';
                 //Hiển thị tổng tiền của các sp có trong cart
                 ?>
             </td>
@@ -127,7 +128,7 @@ $carts = $_SESSION['cart'];
 </form>
     <div style="width: 100%;display: flex">
         <div style="width: 50px;margin-right: 86%">
-            <a href="../Layout/Main.php" class="btn btn-primary btn-md" style="text-decoration: none;width: 200px">
+            <a href="../Layout/Main_menu.php" class="btn btn-primary btn-md" style="text-decoration: none;width: 200px">
                 <i class="fa fa-arrow-left" aria-hidden="true"> </i>&nbsp;Quay về trang chủ
             </a>
         </div>
@@ -148,40 +149,26 @@ if (!$count_money == 0){
         </div>-->
         <div style="width: 40%;">
         <form action="order.php" method="post">
-            <!--<div class="form-group">
-                <label for="exampleInputEmail1">Người nhận hàng</label>
-                <input type="text" style="height: 50px;font-size: 1.6rem" class="form-control" id="exampleInputEmail1" name="receiver_name" required aria-describedby="emailHelp" placeholder="Nhập Tên">
+            <div class="form-group">
+                <label for="receiver_name">Receiver name</label>
+                <input type="text" style="height: 50px;font-size: 1.6rem" class="form-control"
+                       id="receiver_name" name="receiver_name" required aria-describedby="emailHelp"
+                       placeholder="Please enter receiver name">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Số điện thoại</label>
-                <input type="number" style="height: 50px;font-size: 1.6rem" class="form-control" name="receiver_phone" id="exampleInputPassword1" required placeholder="Nhập số điện thoại">
+                <label for="receiver_phone">Receiver phone</label>
+                <input type="number" style="height: 50px;font-size: 1.6rem" class="form-control"
+                       name="receiver_phone" id="receiver_phone" required
+                       placeholder="Please enter receiver phone">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Địa chỉ</label>
-                <input type="tel" style="height: 50px;font-size: 1.6rem" class="form-control" name="receiver_address" required id="exampleInputPassword1" placeholder="Nhập địa chỉ">
+                <label for="receiver_address">Receiver address</label>
+                <input type="tel" style="height: 50px;font-size: 1.6rem" class="form-control"
+                       name="receiver_address" required id="receiver_address"
+                       placeholder="Please enter receiver address">
             </div>
-            <button class="btn btn-primary" style="margin: 125px 145px">Đặt hàng</button>  -->
-            <?php
-            foreach($user as $u){
-            ?>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="hidden" name="user_id">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?=$u['email']?>">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Phone</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" name="phone" value="<?=$u['phone']?>">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Address</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" name="phone" value="<?=$u['address']?>">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <?php
-            }
-            ?>
+            <button class="btn btn-primary" style="margin: 100x 50px">Order</button>
+
         </form>
         </div>
     <!-- </div> -->

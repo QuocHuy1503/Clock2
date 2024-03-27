@@ -1,9 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../account/login.php");
-}
-?>
 
 <!doctype html>
 <html lang="en">
@@ -22,9 +16,10 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
 <?php
-$userId = $_SESSION['user_id'];
+include_once '../Layout/Header.php';
+$userId = $_SESSION['email'];
 include_once("../../connect/open.php");
-$sql = "SELECT * FROM user WHERE id = '$userId'";
+$sql = "SELECT * FROM user WHERE email = '$userId'";
 $user = mysqli_query($connect, $sql);
 ?>
 
@@ -55,7 +50,7 @@ $user = mysqli_query($connect, $sql);
                     <div class="d-flex justify-content-between" style="margin-top: 28px">
                         <div style="width: 40%;">
                             <div class="padding-nice d-flex justify-content-between align-items-center">
-                                Name: <input type="text" name="name" value="<?= $cus['user_name'] ?>">
+                                Name: <input type="text" name="user_name" value="<?= $cus['user_name'] ?>">
                             </div>
 
                             <div class="padding-nice d-flex justify-content-between align-items-center">
@@ -69,7 +64,9 @@ $user = mysqli_query($connect, $sql);
                             <div class="padding-nice d-flex justify-content-between align-items-center">
                                 Address: <input type="text" name="address" value="<?= $cus['address'] ?>">
                             </div>
-
+                            <div class="padding-nice d-flex justify-content-between align-items-center">
+                                <input type="hidden" name="user_id" value="<?= $cus['user_id'] ?>">
+                            </div>
                         </div>
                         <div style="width: 30%">
                             <?php
@@ -103,7 +100,7 @@ $user = mysqli_query($connect, $sql);
 
 <!--footer-->
 <?php
-include_once("../../layout/footer.php");
+include_once("../Layout/Footer.php");
 ?>
 
 <script>

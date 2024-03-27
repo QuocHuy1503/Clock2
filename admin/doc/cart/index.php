@@ -36,79 +36,79 @@ include_once '../../../connect/close.php';
             <div class="menu-right">
 
                 <h1 class="page-header">Danh sách đơn hàng </h1>
-                    <div class="table-member">
-                        <table width="100%" border="1px" cellpadding="0" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th >
-                                    <div class="use-member">ID</div>
-                                    <div class="member-cell"></div>
-                                </th>
-                                <th width="20%">
-                                    <div class="use-member">Ngày mua</div>
-                                    <div class="member-cell"></div>
-                                </th>
-                                <th style="font-size: 1.5rem">
-                                    <div class="use-member">Tên Khách Hàng</div>
-                                    <div class="member-cell"></div>
-                                </th>
-                                <th style="font-size: 1.5rem">
-                                    <div class="use-member">Địa chỉ</div>
-                                    <div class="member-cell"></div>
-                                </th>
-                                <th style="font-size: 1.5rem">
-                                    <div class="use-member">Trạng Thái</div>
-                                    <div class="member-cell"></div>
-                                </th>
-                                <th style="font-size: 1.5rem">
-                                    <div class="use-member">Xem chi tiết đơn hàng</div>
-                                    <div class="member-cell"></div>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            foreach ($orders as $order){
-                                ?>
-                                <tr>
-                                    <td style="font-size: 1.5rem"><?= $order['order_id'] ?></td>
-                                    <td style="font-size: 1.5rem"><?= $order['order_date']?></td>
-                                    <td style="font-size: 1.5rem"><?= $order['user_name']?></td>
-                                    <td style="font-size: 1.5rem"><?= $order['address']?></td>
-                                    <td style="font-size: 1.5rem">
-                                        <?php
-                                        if ($order['order_status'] == 0){
-                                            echo "Pending";
-                                        }
-                                        elseif ($order['order_status'] == 2 ){
-                                            echo "Delivering";
-                                        }
-                                        elseif ($order['order_status'] == 3 ){
-                                            echo "Completed";
-                                        }
-                                        elseif ($order['order_status'] == 4 ){
-                                            echo "Canceled";
-                                        }
-                                        elseif ($order['order_status'] == 1 ){
-                                            echo "Approved";
-                                        }
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <a href="order_detail.php?order_id=<?= $order['order_id'] ?>">VIEW</a>
-                                    </td>
-                                </tr>
-                                <?php
-                            }
+                <div class="table-member">
+                    <table width="100%" border="1px" cellpadding="0" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th >
+                                <div class="use-member">ID</div>
+                                <div class="member-cell"></div>
+                            </th>
+                            <th width="20%">
+                                <div class="use-member">Ngày mua</div>
+                                <div class="member-cell"></div>
+                            </th>
+                            <th style="font-size: 1.5rem">
+                                <div class="use-member">Tên Khách Hàng</div>
+                                <div class="member-cell"></div>
+                            </th>
+                            <th style="font-size: 1.5rem">
+                                <div class="use-member">Địa chỉ</div>
+                                <div class="member-cell"></div>
+                            </th>
+                            <th style="font-size: 1.5rem">
+                                <div class="use-member">Trạng Thái</div>
+                                <div class="member-cell"></div>
+                            </th>
+                            <th style="font-size: 1.5rem">
+                                <div class="use-member">Xem chi tiết đơn hàng</div>
+                                <div class="member-cell"></div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($orders as $order){
                             ?>
-                            </tbody>
-                        </table>
+                            <tr>
+                                <td style="font-size: 1.5rem"><?= $order['order_id'] ?></td>
+                                <td style="font-size: 1.5rem"><?= $order['order_date']?></td>
+                                <td style="font-size: 1.5rem"><?= $order['user_name']?></td>
+                                <td style="font-size: 1.5rem"><?= $order['address']?></td>
+                                <td style="font-size: 1.5rem">
+                                    <?php
+                                    if ($order['order_status'] == 0){
+                                        echo "Pending";
+                                    }
+                                    elseif ($order['order_status'] == 2 ){
+                                        echo "Delivering";
+                                    }
+                                    elseif ($order['order_status'] == 3 ){
+                                        echo "Completed";
+                                    }
+                                    elseif ($order['order_status'] == 4 ){
+                                        echo "Canceled";
+                                    }
+                                    elseif ($order['order_status'] == 1 ){
+                                        echo "Approved";
+                                    }
+                                    ?>
+                                </td>
+                                <td>
+                                    <a href="order_detail.php?order_id=<?= $order['order_id'] ?>">VIEW</a>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                        </tbody>
+                    </table>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
