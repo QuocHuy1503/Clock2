@@ -34,6 +34,9 @@ $carts = array();
 //Lấy cart từ session về trong trường hợp đã có cart
 if(isset($_SESSION['cart'])){
 $carts = $_SESSION['cart'];
+$email = $_SESSION['email'];
+$sqlUser = "SELECT * FROM user WHERE email = '$email'";
+$user = mysqli_query($connect,$sqlUser);
 ?>
 <body>
 <div style="height: auto;width: 100%;display: flex;margin-bottom: 3%">
@@ -54,11 +57,7 @@ $carts = $_SESSION['cart'];
         //Sql lấy thông tin sp theo id
         $sql = "SELECT * FROM watch WHERE watch_id = '$id'";
         //Chạy query
-
-        $email = $_SESSION['email'];
         $watches = mysqli_query($connect, $sql);
-        $sqlUser = "SELECT * FROM user WHERE email = '$email'";
-        $user = mysqli_query($connect,$sqlUser);
         foreach ($watches as $watches){
         ?>
         <tbody >
@@ -149,26 +148,32 @@ if (!$count_money == 0){
         </div>-->
         <div style="width: 40%;">
         <form action="order.php" method="post">
+            <?php 
+            foreach($user as $u){
+            ?>
             <div class="form-group">
                 <label for="receiver_name">Receiver name</label>
                 <input type="text" style="height: 50px;font-size: 1.6rem" class="form-control"
                        id="receiver_name" name="receiver_name" required aria-describedby="emailHelp"
-                       placeholder="Please enter receiver name">
+                       placeholder="Please enter receiver name" value="<?= $u['user_name']?>">
             </div>
             <div class="form-group">
                 <label for="receiver_phone">Receiver phone</label>
                 <input type="number" style="height: 50px;font-size: 1.6rem" class="form-control"
                        name="receiver_phone" id="receiver_phone" required
-                       placeholder="Please enter receiver phone">
+                       placeholder="Please enter receiver phone" value="<?= $u['phone']?>">
             </div>
             <div class="form-group">
                 <label for="receiver_address">Receiver address</label>
                 <input type="tel" style="height: 50px;font-size: 1.6rem" class="form-control"
                        name="receiver_address" required id="receiver_address"
-                       placeholder="Please enter receiver address">
+                       placeholder="Please enter receiver address" value="<?= $u['address']?>">
             </div>
+            <?php
+            }
+            ?>
             <button class="btn btn-primary" style="margin: 100x 50px">Order</button>
-
+            
         </form>
         </div>
     <!-- </div> -->

@@ -9,9 +9,9 @@ if(isset($_SESSION['user_id'])){
     //Lấy id của customer
     $user_id = $_SESSION['user_id'];
     //Lấy tên và số điện thoại và địa chỉ người nhận
-    $receiver_name = $_POST['receiver_name'];
-    $receiver_phone = $_POST['receiver_phone'];
-    $receiver_address = $_POST['receiver_address'];
+    // $receiver_name = $_POST['receiver_name'];
+    // $receiver_phone = $_POST['receiver_phone'];
+    // $receiver_address = $_POST['receiver_address'];
     //Mở kết nối
     include_once '../../connect/open.php';
     //Query thêm dữ liệu lên bảng orders
@@ -39,7 +39,7 @@ VALUES ('$order_date', '$order_status', '$user_id', '$receiver_name','$receiver_
         foreach ($productPrices as $productPrice){
             $subtotal = $productPrice['subtotal'];
             $sqlInsertOrderDetail = "INSERT INTO order_details(watch_id,order_id,subtotal,sold_quantity) 
-VALUES ('$watch_id','$order_id','$subtotal','$sold_quantity')";
+            VALUES ('$watch_id','$order_id','$subtotal','$sold_quantity')";
             //Chạy query insert order_detail
             mysqli_query($connect, $sqlInsertOrderDetail);
         }

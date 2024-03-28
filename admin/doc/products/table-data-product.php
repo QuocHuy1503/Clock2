@@ -81,7 +81,7 @@ include_once '../../../connect/close.php'
                                     <td><?= $item['description']?></td>
                                     <td><?= $item['price']?></td>
                                     <td><?= $item['quantity']?></td>
-                                    <td><?php if($item['item_status'] ==  1) { echo 'Mở';} else{ echo 'Khóa';}?></td>
+                                    <td><?php if($item['status'] ==  0) { echo 'Mở';} else{ echo 'Khóa';}?></td>
                                     <td><img src="../../../Asset/img/<?= $item['image']?>" alt="" width="100px;"></td>
 
                                     <td><?php if($item['category_id'] == $item['cate_id']){ echo $item['category_name'];}?></td>
@@ -91,7 +91,7 @@ include_once '../../../connect/close.php'
                                           </a>
                                         <a class="btn btn-primary btn-sm edit" type="button" href="edit.php?watch_id=<?= $item['watch_id'] ?>
                                                 title="Sửa"><i class="fas fa-edit"></i></arc>
-                                       
+                                      
                                     </td>
                                 </tr>
                                 <?php

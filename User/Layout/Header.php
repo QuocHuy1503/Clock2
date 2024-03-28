@@ -17,8 +17,8 @@ if(isset($_GET['search'])){
     <link rel="stylesheet" href="../../Asset/css/sb-admin-2.min.css">
     <link rel="stylesheet" href="../../Asset/js/sb-admin-2.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../Admin2/css/bootstrap.css">
-    <link rel="stylesheet" href="../../Admin2/css/header_style.css">
+    <!-- <link rel="stylesheet" href="../../Admin2/css/bootstrap.css"> -->
+    <!-- <link rel="stylesheet" href="../../Admin2/css/header_style.css"> -->
     <link rel="stylesheet" href="../../Admin2/css/main_style.css">
     <link rel="stylesheet" href="../../Admin2/css/profile.css">
     <style>
@@ -227,7 +227,7 @@ if(isset($_GET['search'])){
             <!--            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
             -->
             <!--            <i class="fa-brands fa-bootstrap fa-2xl"></i>-->
-            <img src="../../Asset/img/XinXoTrang.jpg" style="width: 100px">
+            <img src="../../Asset/img/z5084546611612_4cfb5cb31959125ed73c47c77fdfaec2.jpg" style="width: 100px">
         </a>
 
         <!--1-->
@@ -257,7 +257,7 @@ if(isset($_GET['search'])){
                 <?php
             }else{
                 ?>
-                <div class="dropdown">
+                <div class="dropdown" style="padding: 20px;">
                     <i class="fa-solid fa-user"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"

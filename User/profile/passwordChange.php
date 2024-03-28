@@ -19,7 +19,7 @@
 include_once '../Layout/Header.php';
 $userId = $_SESSION['email'];
 include_once("../../connect/open.php");
-$sql = "SELECT * FROM user WHERE email = '$userId'";
+$sql = "SELECT password FROM user WHERE email = '$userId'";
 $user = mysqli_query($connect, $sql);
 ?>
 
@@ -34,7 +34,7 @@ $user = mysqli_query($connect, $sql);
     </div>
 
     <div id="right-container">
-        <form action="info-update.php" method="post">
+        <form action="" method="post">
             <div style="height: auto; margin: 40px">
                 <div>
                     <h2>
@@ -50,10 +50,12 @@ $user = mysqli_query($connect, $sql);
                     <div class="d-flex justify-content-between" style="margin-top: 28px">
                         <div style="width: 40%;">
                             <div class="padding-nice d-flex justify-content-between align-items-center">
-                                Name: <input type="text" name="user_name" value="<?= $cus['user_name'] ?>">
+                                Change password: <input type="text" name="password" value="<?= $cus['password'] ?>">
                             </div>
-
-                            <div class="padding-nice d-flex justify-content-between align-items-center">
+                            <!-- <div class="padding-nice d-flex justify-content-between align-items-center">
+                                Name: <input type="text" name="user_name" value="<?= $cus['user_name'] ?>">
+                            </div> -->
+                            <!-- <div class="padding-nice d-flex justify-content-between align-items-center">
                                 Email: <input type="email" name="email" value="<?= $cus['email'] ?>">
                             </div>
 
@@ -66,7 +68,7 @@ $user = mysqli_query($connect, $sql);
                             </div>
                             <div class="padding-nice d-flex justify-content-between align-items-center">
                                 <input type="hidden" name="user_id" value="<?= $cus['user_id'] ?>">
-                            </div>
+                            </div> -->
                         </div>
                         <div style="width: 30%">
                             <?php

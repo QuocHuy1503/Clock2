@@ -189,7 +189,7 @@ include_once '../../../connect/close.php';
 
               <div class="form-group  col-md-3">
                 <label class="control-label">Thời gian xuất khẩu</label>
-                <input class="form-control" type="date" name="publication_year" value="<?= $product['publication_year'] ?>">
+                <input class="form-control" type="number"  min="1900" max="2099" name="publication_year" value="<?= $product['publication_year'] ?>">
               </div>
               <div class="form-group  col-md-3">
                 <label class="control-label">Số lượng</label>
@@ -201,7 +201,7 @@ include_once '../../../connect/close.php';
               </div>
               <div class="form-group col-md-3 ">
                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                <select class="form-control" id="exampleSelect1" name="item_status" required>
+                <select class="form-control" id="exampleSelect1" name="status" required>
                   <option>-- Chọn tình trạng --</option>
                   <option value="1">Còn hàng</option>
                   <option value="2">Khóa hàng</option>
@@ -223,12 +223,12 @@ include_once '../../../connect/close.php';
               <div class="form-group col-md-12">
                   <label>Ảnh sản phẩm</label>
                   <input type="file"  name="image" value="<?= $product['image'] ?>">
-                  <img src="../../img-sanpham/<?= $product['image'] ?>">
+                  <img src=".../../../Asset/img/<?= $product['image'] ?>">
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Mô tả sản phẩm</label>
                 <textarea class="form-control" name="description" id="description"
-                          value="<?= $product['description'] ?>"></textarea>
+                          value="<?= $product['description'] ?>"><?=$product['description']?></textarea>
               </div>
 
           <button class="btn btn-save" type="submit">Lưu lại</button>

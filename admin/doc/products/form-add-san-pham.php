@@ -176,25 +176,24 @@ include_once '../../../connect/close.php'
               
               <div class="form-group col-md-3">
                 <label class="control-label">Tên sản phẩm</label>
-                <input class="form-control" type="text" name="watch_name">
+                <input class="form-control" type="text" name="watch_name" placeholder="Rolex">
               </div>
 
               <div class="form-group  col-md-3">
                 <label class="control-label">Thời gian xuất khẩu</label>
-                <input class="form-control" type="date" name="publication_year">
+                <input class="form-control"  min="1900" max="2099" type="number" placeholder="min: 1990" name="publication_year">
               </div>
               <div class="form-group  col-md-3">
                 <label class="control-label">Số lượng</label>
-                <input class="form-control" type="number" name="quantity">
+                <input class="form-control" type="number" name="quantity" min="1" placeholder="1">
               </div>
               <div class="form-group  col-md-3">
                 <label class="control-label">Giá bán</label>
-                <input class="form-control" type="number" name="price">
+                <input class="form-control" type="number" name="price"min="1" placeholder="100$">
               </div>
               <div class="form-group col-md-3 ">
                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                <select class="form-control" id="exampleSelect1" name="item_status">
-                  <option>-- Chọn tình trạng --</option>
+                <select class="form-control" id="exampleSelect1" name="status">
                   <option value="1">Còn hàng</option>
                   <option value="2">Khóa hàng</option>
                 </select>
@@ -202,7 +201,6 @@ include_once '../../../connect/close.php'
               <div class="form-group col-md-3">
                 <label for="exampleSelect1" class="control-label">Danh mục</label>
                 <select class="form-control" id="exampleSelect1" name="category_id">
-                  <option>-- Chọn danh mục --</option>
                   <?php foreach($categories as $item){?>
                   <option value ="<?= $item['id']?>"><?= $item['name']?></option>
                   <?php }?>

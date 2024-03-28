@@ -26,9 +26,9 @@ $account = $_GET['id'];
 }*/
 include_once '../../Connects/open.php';
 //Query
-$sql = "SELECT order_details.*, books.name , books.image
+$sql = "SELECT order_details.*, watch.name , watch.image
         FROM order_details 
-        INNER JOIN books ON order_details.book_id = books.id
+        INNER JOIN watch ON order_details.watch_id = books.id
         WHERE order_id = '$account'";
 //Chạy query cua $sql chinh
 $order_details = mysqli_query($connect, $sql);

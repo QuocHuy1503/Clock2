@@ -1,6 +1,4 @@
-<?php
-session_abort();
-?>
+
 
 <!doctype html>
 <html lang="en">
@@ -52,12 +50,26 @@ if (isset($_GET['page'])) {
 $start = ($page - 1) * $recordOnePage;
 
 //main
-$sql = "SELECT orders.*, (SELECT SUM(sold_quantity * subtotal) FROM order_details 
-            WHERE order_id = orders.order_id) AS total_cost
-            FROM orders 
-            WHERE user_id = '$userId' AND orders.order_status LIKE '%$order_status%'
-            ORDER BY (orders.order_status) ASC, (orders.order_id) DESC
-            LIMIT $start, $recordOnePage";
+// $sql = "SELECT orders.*, (SELECT SUM(sold_quantity * subtotal) FROM order_details 
+//             WHERE order_id = orders.order_id) AS total_cost
+//             FROM orders 
+//             WHERE user_id = '$userId' AND orders.order_status LIKE '%$order_status%'
+//             ORDER BY (orders.order_status) ASC, (orders.order_id) DESC
+//             LIMIT $start, $recordOnePage";
+        
+$sql = "SELECT orders.order_id, orders.order_date, orders.order_status , sum(price * quantity) as total FROM
+        orders INNER JOIN order_details on orders.order_id = order_details.order_id 
+        inner join watch on watch.watch_id = order_details.watch_id
+        WHERE user_id = '$userId' AND orders.order_status LIKE '%$order_status%'
+        ORDER BY (orders.order_status) ASC, (orders.order_id) DESC
+        LIMIT $start, $recordOnePage";
+// "select orders.order_id, orders.order_date, orders.order_status ,
+// sum(price * quantity) as total from orders 
+// inner join order_details on orders.order_id = order_details.order_id 
+// inner join watch on watch.watch_id = order_details.watch_id WHERE user_id = '$userId' AND orders.order_status LIKE '%$order_status%'
+// ORDER BY (orders.order_status) ASC, (orders.order_id) DESC
+// LIMIT $start, $recordOnePage; 
+// "
 $orderLists = mysqli_query($connect, $sql);
 
 //format usd
@@ -74,10 +86,9 @@ if (!function_exists('currency_format')) {
 <!-- Header -->
 
 <!-- Padding from header -->
-<div id="about"></div>
 <!-- Content -->
 
-<div id="main-container" class="mt-5">
+<div id="main-container" class="m-5">
     <div id="left-container">
         <?php
         include_once("../Layout/UserProfile.php");
@@ -224,7 +235,7 @@ if (!function_exists('currency_format')) {
                             </td>
                             <td>
                                 <?php
-                                $totalCost = $list['total_cost'];
+                                $totalCost = $list['total'];
                                 echo currency_format($totalCost) ?>
                             </td>
                             <td>

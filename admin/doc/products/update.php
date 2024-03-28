@@ -13,7 +13,7 @@ if(isset($_FILES['image']['name'])) {
 include_once '../../../connect/open.php';
 $sql = "UPDATE watch SET watch_name = '$watch_name', publication_year = '$publication_year', 
                  description = '$description', price = '$price', quantity = '$quantity',  
-                item_status = '$item_status', category_id = '$category_id' , image = '$image' WHERE watch_id = '$watch_id'";
+                 status = '$item_status', category_id = '$category_id' , image = '$image' WHERE watch_id = '$watch_id'";
 //
 //Lưu ảnh từ vị trí hiện tại của ảnh vào thư mục image
 //Kiểm tra ảnh đã tồn tại hay chưa

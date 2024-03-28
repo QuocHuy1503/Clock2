@@ -30,7 +30,7 @@ INNER JOIN order_details ON orders.order_id = order_details.order_id
 left join watch on order_details.watch_id = watch.watch_id";
 $orders = mysqli_query($connect,$sql);
 include_once '../../../connect/close.php';
-include_once '../header-navbar.php';
+include_once '../layout/header-navbar.php';
 ?>
 <main class="app-content">
     <div class="app-title">

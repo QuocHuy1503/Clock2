@@ -8,13 +8,11 @@
 -- PHP Version: 8.0.30
 drop database watch;
 create database watch;
-
 use watch;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-select * from orders;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -25,7 +23,10 @@ select * from orders;
 --
 
 -- --------------------------------------------------------
-
+SELECT order_details.*, watch.watch_name as watch_name, watch.image as watch_image  
+        FROM order_details 
+        INNER JOIN watch ON order_details.watch_id = watch.watch_id
+        WHERE order_id = 2;
 --
 -- Table structure for table `admins`
 --
@@ -113,7 +114,10 @@ CREATE TABLE `orders` (
   `order_date` varchar(25) DEFAULT NULL,
   `pay_id` int(11) DEFAULT NULL,
   `ad_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+	receiver_name varchar(255),
+    receiver_address varchar(255),
+    receiver_phone varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

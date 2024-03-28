@@ -47,12 +47,8 @@ $total_money = 0;
 <?php
 include("../Layout/Header.php");
 ?>
-<!-- Padding from header -->
-<div id="about"></div>
 
-<!-- Content -->
-
-<div id="main-container" class="mt-5">
+<div id="main-container" class="m-5">
     <div id="left-container">
         <?php
         include_once("../Layout/UserProfile.php");
@@ -165,7 +161,7 @@ include("../Layout/Header.php");
                                     <div class="w-50"><?= $orderDetail['watch_name'] ?></div>
                                     <div class="w-50">
                                         <img
-                                            src="../../admins/images/<?= $orderDetail['watch_image'] ?>" alt=""
+                                            src="../../Asset/img/<?= $orderDetail['watch_image'] ?>" alt=""
                                             height="100px">
                                     </div>
                                 </div>
@@ -270,7 +266,7 @@ include_once("../Layout/footer.php");
 
         <div class="modal__footer">
             <div>
-                <a href="Cancel-orders.php?id=<?= $orderID ?>" class="btn btn-danger" style="font-size: 16px;">
+                <a href="Cancel-orders.php?order_id=<?= $orderID ?>" class="btn btn-danger" style="font-size: 16px;">
                     Cancel order</a>
             </div>
         </div>

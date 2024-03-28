@@ -30,7 +30,7 @@ if(isset($_GET['page'])){
 //Tính bản ghi bắt đầu của trang
 include_once 'Header.php';
 $start = ($page - 1) * $recordOnePage;
-$sql = "SELECT * FROM watch WHERE watch_name LIKE '%$search%' LIMIT $start,$recordOnePage";
+$sql = "SELECT * FROM watch WHERE (watch_name LIKE '%$search%') OR (status = 1) LIMIT $start,$recordOnePage";
 $watch = mysqli_query($connect,$sql);
 $sqlUser = "SELECT * FROM user";
 
@@ -95,7 +95,7 @@ include_once 'Header.php'
                     <a href="Product_detail.php?watch_id=<?= $wa['watch_id']?>">
                     <div class="single-product">
                         <div class="part-1">
-                         <img src="../../Asset/img/<?= $wa['image']?>" style="max-width: 100%; height: 100%;">
+                         <img src="../../Asset/img/<?= $wa['image']?>" style="max-width: 100%; height: auto;">
                         </div>
                         <div class="part-2">
                             <h3 class="product-title"><?= $wa['watch_name']?></h3>

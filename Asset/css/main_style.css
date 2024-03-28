@@ -1,0 +1,291 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#about {
+    padding-top: 80.25px;
+}
+
+/* section css */
+.section-default {
+    text-align: center;
+    color: white;
+    background-color: black;
+    display: block;
+    overflow: hidden;
+    transition: 0.4s all ease-in-out;
+    height: 50vh;
+    background-size: cover;
+    background-position-y: center;
+}
+
+.section-default .heading-center {
+    font-weight: 700;
+    font-size: 3.5rem;
+    -webkit-text-stroke: 1.5px black;
+    line-height: 50vh;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* home css */
+.section-default .heading-left {
+    font-weight: 600;
+    font-size: 4rem;
+    -webkit-text-stroke: 1.5px black;
+}
+
+.left-container {
+    text-align: left !important;
+    margin-left: 10%;
+    margin-top: 16%;
+}
+
+.read-more {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    padding: 1% 2%;
+    font-weight: bold;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
+.read-more:hover {
+    background-color: lightgray;
+    color: black;
+}
+
+.discover-header {
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    -webkit-text-stroke: 1.5px black;
+    padding: 4%;
+    font-weight: 700;
+}
+
+.discover-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0% 9.5%;
+    border-radius: 10px;
+}
+
+.like-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0% 9.5%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.discover-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 4%;
+    align-items: center;
+}
+
+.discover-item img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    border: 10px solid white;
+    border-radius: 28%;
+}
+
+.ditem-text {
+    width: 50%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* category css */
+.category-zoom:hover {
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.category-items img {
+    width: 100%;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+}
+
+.button-more {
+    background-color: #303036;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    margin-top: 12px;
+    border-radius: 20px;
+    width: 16%;
+}
+
+.button-more:hover {
+    color: darkgrey;
+}
+
+.box-shadow-category {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+/* furniture css */
+.furniture-slider {
+    height: 50vh;
+    background-size: cover;
+    background-position-y: center;
+}
+
+.img-hover-zoom:hover {
+    transform: scale(1.1);
+}
+
+.fur-img {
+    width: 100%;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+}
+
+.sort-button {
+    height: 40px;
+    color: white;
+    background: black;
+    padding: 20% 80%;
+    margin-top: 24px;
+    margin-left: 22%
+}
+
+.search-bar {
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 10%;
+    margin-top: 24px;
+}
+
+.bd-gray {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.view-detail-btn {
+    background-image: linear-gradient(to right, coral, orange);
+    box-shadow: rgba(255, 165, 0, 0.4) 0px 0.0625em 0.0625em, rgba(255, 165, 0, 0.4) 0px 0.125em 0.5em, rgba(255, 165, 0, 0.2) 0px 0px 0px 1px inset;
+    padding: 8px;
+    border-radius: 4px;
+    color: white;
+}
+
+.view-detail-btn:hover {
+    color: white;
+    background-image: linear-gradient(to right, coral, orangered);
+}
+
+.add-to-cart-btn {
+    background-image: linear-gradient(to right, dodgerblue, deepskyblue);
+    box-shadow: rgba(30, 144, 255, 0.4) 0px 0.0625em 0.0625em, rgba(30, 144, 255, 0.4) 0px 0.125em 0.5em, rgba(30, 144, 255, 0.2) 0px 0px 0px 1px inset;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.add-to-cart-btn:hover {
+    background-image: linear-gradient(to right, dodgerblue, steelblue);
+}
+
+/* producer css */
+/* inspiration css */
+.is-diviver {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #bebebf;
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    height: 2px;
+    width: 100%;
+    max-width: 30px;
+}
+
+.transform-middle {
+    transform: translateX(136.8%) !important;
+}
+
+.flickity-page-dots {
+    position: initial !important;
+    margin-top: 20px !important;
+}
+
+.carousel {
+    margin-top: 8%;
+}
+
+.carousel-cell {
+    width: 66%;
+    height: 500px;
+    margin-right: 270px;
+    border-radius: 15px;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+}
+
+.carousel-cell:before {
+    display: block;
+    content: '';
+}
+
+/* about css */
+
+/*other*/
+.opacity-7 {
+    opacity: 0.7;
+}
+
+.fw-bold-2 {
+    font-weight: 500 !important;
+}
+
+.bd-rd {
+    border-radius: 100px 100px / 120px;
+}
+
+.w-s {
+    width: 398px;
+}
+
+.bd-gray {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.success-alert {
+    top: 67%;
+    right: 20px;
+    box-shadow: 1px 1px green;
+    animation: fadeOut 5s;
+}
+
+.fa-x:hover {
+    cursor: pointer;
+}
+
+/*order success*/
+.btn-order-success {
+    color: #fff;
+    background-color: yellowgreen;
+    border-color: yellowgreen;
+    font-size: 18px;
+    border-radius: 28px;
+    padding: 6px 12px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+
+.btn-order-success:hover {
+    color: #fff;
+    background-color: #82ab26;
+    border-color: #82ab26;
+}
