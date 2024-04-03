@@ -137,8 +137,7 @@ if (isset($_POST['yeucauButton'])==true){
         $sql = "UPDATE user SET password = ? WHERE email = ?";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$matkhauNew, $email]);
-        $loi = "Mật khẩu của bạn đã được reset về mật khẩu mặc định. 
-        Còn bạn quên mật khẩu mặc định hãy đến trang chủ";
+        $loi = "Mật khẩu của bạn đã được reset về mật khẩu mặc định. Còn bạn quên mật khẩu mặc định hãy đen trang chủ";
     }
 }
 
@@ -183,27 +182,30 @@ if (isset($_POST['yeucauButton'])==true){
     }
 }
 */?>
-<section class="vh-100 gradient-custom">
-    <div class="form-box">
-        <div class="form-value">
-            <form method="post" >
-                <h2>Login</h2>
-                <?php if ($loi!="") {?>
-                    <div class="alert alert-danger"><?php echo $loi?> </div>
-                <?php } ?>
-                <div class="inputbox">
-                    <ion-icon name="mail-outline"></ion-icon>
-                    <input value="<?php if (isset($email)==true) echo $_POST['email']?>"
-                           type="email" id="email" name="email" >
-                    <label for="email">Email</label>
+    <section class="vh-100 gradient-custom">
+        <div class="form-box">
+            <div class="form-value">
+    <form method="post" >
+    <h2>Đăng nhập</h2>
+    <?php if ($loi!="") {?>
+        <div class="alert alert-danger"><?php echo $loi?> </div>
+    <?php } ?>
+            <div class="inputbox">
+                <ion-icon name="mail-outline"></ion-icon>
+                <input value="<?php if (isset($email)==true) echo $_POST['email']?>" type="email" id="email" name="email" >
+                <label for="email">Email</label>
 
-                </div>
-                <button type="submit" name="yeucauButton" value="nutgui">Send request</button>
-            </form>
+            </div>
+    <button type="submit" name="yeucauButton" value="nutgui"> Gửi yêu cầu </button>
+        <div class="register">
+            <br>
+            <p>Return to Login page.<a href="login.php"> Login</a></p>
         </div>
-    </div>
-</section>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-</body>
+    </form>
+            </div>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    </body>
 </html>
