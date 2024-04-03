@@ -191,7 +191,7 @@ include_once '../../../connect/close.php';
                         </div>
                         <div class="form-group col-md-3">
                             <label class="control-label">Trạng thái tài khoản</label>
-                            <select class="form-control" id="exampleSelect2" required name="status">
+                            <select class="form-control" id="exampleSelect2" required name="user_status_id">
                                 <option>-- Chọn giới tính --</option>
                                 <option value="0">Offline</option>
                                 <option value="1">Online</option>

@@ -5,18 +5,18 @@ if(isset($_SESSION['user_id'])){
     //Lấy ngày hiện tại
     $order_date = date('Y-m-d');
     //Lấy status (status mặc định là 0 tương ứng với trạng thái chờ xác nhận của đơn hàng)
-    $order_status = 0;
+    $order_status = 1;
     //Lấy id của customer
     $user_id = $_SESSION['user_id'];
     //Lấy tên và số điện thoại và địa chỉ người nhận
-    // $receiver_name = $_POST['receiver_name'];
-    // $receiver_phone = $_POST['receiver_phone'];
-    // $receiver_address = $_POST['receiver_address'];
+    $receiver_name = $_POST['receiver_name'];
+    $receiver_phone = $_POST['receiver_phone'];
+    $receiver_address = $_POST['receiver_address'];
     //Mở kết nối
     include_once '../../connect/open.php';
     //Query thêm dữ liệu lên bảng orders
     $sqlInsertOrder = "INSERT INTO orders(order_date, order_status, user_id,receiver_name,receiver_phone,receiver_address) 
-VALUES ('$order_date', '$order_status', '$user_id', '$receiver_name','$receiver_phone','$receiver_address' )";
+    VALUES ('$order_date', '$order_status', '$user_id', '$receiver_name','$receiver_phone','$receiver_address' )";
     //Chạy query insert dữ liệu lên bảng orders
     mysqli_query($connect, $sqlInsertOrder);
     //query lấy order_id lớn nhất của customer đang login hiện tại

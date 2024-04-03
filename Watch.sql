@@ -1,35 +1,7 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Jan 20, 2024 at 10:41 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+
 drop database watch;
 create database watch;
 use watch;
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `watch`
---
-
--- --------------------------------------------------------
-SELECT order_details.*, watch.watch_name as watch_name, watch.image as watch_image  
-        FROM order_details 
-        INNER JOIN watch ON order_details.watch_id = watch.watch_id
-        WHERE order_id = 2;
---
--- Table structure for table `admins`
---
 
 CREATE TABLE `admins` (
   `admin_id` int(11) NOT NULL,
@@ -38,28 +10,18 @@ CREATE TABLE `admins` (
   `password` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `admins`
---
 
 INSERT INTO `admins` (`admin_id`, `admin_name`, `email`, `password`) VALUES
 (1, 'Tran Dang Ninh', 'trandangninh@gmail.com', 'trandangninh'),
 (2, 'Tran Dang Ninh', 'trandangninh@gmail.com', 'trandangninh');
 
--- --------------------------------------------------------
 
---
--- Table structure for table `categories`
---
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `categories`
---
 
 INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'rolex'),
@@ -68,11 +30,6 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 (4, 'Patek Philippe'),
 (5, 'Jaeger-LeCoultre');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `watch`
---
 
 CREATE TABLE `watch` (
   `watch_id` int(11) NOT NULL,
@@ -86,9 +43,6 @@ CREATE TABLE `watch` (
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `watch`
---
 
 INSERT INTO `watch` (`watch_id`, `watch_name`, `publication_year`, `description`, `price`, `quantity`, `image`, `category_id`) VALUES
 (1, 'FirsTime & Co. Bronze Big', '2016', 'FASHIONABLE AND FUNCTIONAL - This beautiful analog clock features an open face with extra large Roman numerals to easily tell the time. Complete with a lightweight yet durable plastic frame, this clock will make a statement in any home or office space', 87, 100, '61x5tgrFbeL._AC_SX679_.jpg', 2),
@@ -102,12 +56,6 @@ INSERT INTO `watch` (`watch_id`, `watch_name`, `publication_year`, `description`
 (9, 'Signature Design by Ashle', '2020', 'CHARMING DETAILS: This large wall clock exudes traditional style with details like a distressed cream clock face and the unique scrolling design above the long hands of the clock.', 119, 100, '919tBv5e9vL._AC_SX679_.jpg', 1),
 (10, 'FirsTime & Co. Brown Josi', '1988', 'FASHIONABLE AND FUNCTIONAL - This beautiful clock features an airy oversized metal arch design and an open face with Roman numerals on the frame, making a statement in any room', 122, 100, '81r3QMVJ8mL._AC_SX679_.jpg', 2);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `orders`
---
-
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `order_status` varchar(25) DEFAULT NULL,
@@ -120,11 +68,6 @@ CREATE TABLE `orders` (
     receiver_phone varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `order_details`
---
 
 CREATE TABLE `order_details` (
   `order_id` int(11) DEFAULT NULL,
@@ -133,20 +76,12 @@ CREATE TABLE `order_details` (
   `subtotal` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `payment_method`
---
 
 CREATE TABLE `payment_method` (
   `payment_id` int(11) NOT NULL,
   `method_name` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `payment_method`
---
 
 INSERT INTO `payment_method` (`payment_id`, `method_name`) VALUES
 (1, 'Momo'),
@@ -160,18 +95,11 @@ INSERT INTO `payment_method` (`payment_id`, `method_name`) VALUES
 (9, 'Zalo Pay'),
 (10, 'QR code');
 
--- --------------------------------------------------------
-
 CREATE TABLE `status` (
   `status_id` int(11) NOT NULL,
   `user_status` varchar(100) NOT NULL,
   primary key (status_id)
   );
-  
---
--- Table structure for table `user`
---
-
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `user_name` varchar(25) DEFAULT NULL,
@@ -179,99 +107,47 @@ CREATE TABLE `user` (
   `address` varchar(25) DEFAULT NULL,
   `password` varchar(25) DEFAULT NULL,
   `email` varchar(25) DEFAULT NULL,
-  `user_status_id` int(11) DEFAULT NULL,
-  primary key (user_id),
-  foreign key (user_status_id) references status(status_id)
+  `status` int(11) DEFAULT NULL,
+  primary key (user_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Indexes for dumped tables
---
-
-  
-  INSERT INTO `status` (`status_id`, `user_status`) VALUES
-(1, 'Active'),
-(2, 'Deactive');
-
-
---
--- Indexes for table `admins`
---
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`admin_id`);
-
---
--- Indexes for table `categories`
---
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `watch`
---
 ALTER TABLE `watch`
   ADD PRIMARY KEY (`watch_id`),
   ADD KEY `category_id` (`category_id`);
 
---
--- Indexes for table `orders`
---
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
   ADD KEY `pay_id` (`pay_id`),
   ADD KEY `ad_id` (`ad_id`),
   ADD KEY `user_id` (`user_id`);
 
---
--- Indexes for table `order_details`
---
 ALTER TABLE `order_details`
   ADD KEY `order_id` (`order_id`),
   ADD KEY `watch_id` (`watch_id`);
-
---
--- Indexes for table `payment_method`
---
 ALTER TABLE `payment_method`
   ADD PRIMARY KEY (`payment_id`);
 
-
---
--- AUTO_INCREMENT for dumped tables
---
---
--- AUTO_INCREMENT for table `admins`
---
 ALTER TABLE `admins`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
---
--- AUTO_INCREMENT for table `categories`
---
+
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
---
--- AUTO_INCREMENT for table `watch`
---
 ALTER TABLE `watch`
   MODIFY `watch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
---
--- AUTO_INCREMENT for table `orders`
---
 ALTER TABLE `orders`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `payment_method`
---
 ALTER TABLE `payment_method`
   MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
---
--- AUTO_INCREMENT for table `user`
---
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
@@ -301,13 +177,9 @@ ALTER TABLE `order_details`
   ADD CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`watch_id`) REFERENCES `watch` (`watch_id`);
 COMMIT;
 
-  INSERT INTO `user` (`user_name`,`phone`, `address`,`password`,`email`,`user_status_id`) VALUES
+  INSERT INTO `user` (`user_name`,`phone`, `address`,`password`,`email`,`status`) VALUES
 ('Nguyen Van A',0123456789,'Thach That,Ha Noi','123456','nguyenvana@gmail.com',1),
 ('Nguyen Van B',0123456789,'Thach That,Ha Noi','123456','nguyenvanb@gmail.com',1),
 ('Nguyen Van C',0123456789,'Thach That,Ha Noi','123456','nguyenvanc@gmail.com',2),
 ('Nguyen Van D',0123456789,'Thach That,Ha Noi','123456','nguyenvand@gmail.com',2);
 
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -30,7 +30,7 @@ if(isset($_GET['page'])){
 //Tính bản ghi bắt đầu của trang
 include_once 'Header.php';
 $start = ($page - 1) * $recordOnePage;
-$sql = "SELECT * FROM watch WHERE (watch_name LIKE '%$search%') OR (status = 1) LIMIT $start,$recordOnePage";
+$sql = "SELECT * FROM watch WHERE (watch_name LIKE '%$search%') LIMIT $start,$recordOnePage";
 $watch = mysqli_query($connect,$sql);
 $sqlUser = "SELECT * FROM user";
 
@@ -90,6 +90,7 @@ include_once 'Header.php'
             <?php
             /*Vòng lặp để hiển thị tất cả sản phẩm - Loop for displaying all product*/
             foreach ($watch as $wa){
+                if($wa['status'] == 1){
             ?>
                 <div class="col-md-6 col-lg-4 col-xl-3">
                     <a href="Product_detail.php?watch_id=<?= $wa['watch_id']?>">
@@ -106,6 +107,7 @@ include_once 'Header.php'
                     </a>
                 </div>
             <?php
+                }
             /*Vòng lặp để hiển thị tất cả sản phẩm - Loop for displaying all product*/
             }
             ?>

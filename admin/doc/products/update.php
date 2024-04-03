@@ -5,7 +5,7 @@ $publication_year = $_POST['publication_year'];
 $description = $_POST['description'];
 $price = $_POST['price'];
 $quantity = $_POST['quantity'];
-$item_status = $_POST['item_status'];
+$item_status = $_POST['status'];
 $category_id = $_POST['category_id'];
 if(isset($_FILES['image']['name'])) {
     $image = $_FILES['image']['name'];

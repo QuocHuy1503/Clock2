@@ -35,7 +35,7 @@ $sql = "SELECT * FROM order_details
         WHERE order_details.order_id = '$order_id'";
 //Chạy query cua $sql chinh
 $orders = mysqli_query($connect, $sql);
-include_once '../header-navbar.php';
+include_once '../layout/header-navbar.php';
 // Chay query cua $sqlOrder de tim ai order
 
 //Đóng kết nối

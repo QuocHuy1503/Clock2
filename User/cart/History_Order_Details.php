@@ -7,13 +7,15 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" type= "text/css" href="../assets/css/base.css">
-    <link rel="stylesheet" type= "text/css" href="../assets/css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="../assets/fonts/fontawesome-free-6.4.0-web/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap">
     <link href="../assets/js/main.js" rel="stylesheet" >
+    <link rel="stylesheet" href="../../Asset/css/bootstrap.css">
+    <link rel="stylesheet" href="../../Asset/css/header_style.css">
+    <link rel="stylesheet" href="../../Asset/css/main_style.css">
+    <link rel="stylesheet" href="../../Asset/css/profile.css">
     <title>Document</title>
 </head>
 <body>
@@ -25,6 +27,7 @@ $account = $_GET['id'];
     $account = $_SESSION['id'];
 }*/
 include_once '../../Connects/open.php';
+
 //Query
 $sql = "SELECT order_details.*, watch.name , watch.image
         FROM order_details 

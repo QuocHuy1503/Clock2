@@ -182,7 +182,15 @@ if (isset($_POST['yeucauButton'])==true){
     }
 }
 */?>
+<<<<<<< Updated upstream
     <section class="vh-100 gradient-custom">
+=======
+<<<<<<< HEAD
+ <section class="vh-100 gradient-custom">
+=======
+    <section class="vh-100 gradient-custom">
+>>>>>>> 6afb730491d636d37681070ecd6baab93182999f
+>>>>>>> Stashed changes
         <div class="form-box">
             <div class="form-value">
     <form method="post" >

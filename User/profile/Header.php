@@ -16,8 +16,6 @@ if(isset($_GET['search'])){
     <link rel="icon" href="../../Asset/fontawesome-free-6.5.1-web/css/all.min.css">
     <link rel="stylesheet" href="../../Asset/css/sb-admin-2.min.css">
     <link rel="stylesheet" href="../../Asset/js/sb-admin-2.min.js">
-    <link rel="stylesheet" href="../../Admin2/css/bootstrap.css">
-    <link rel="stylesheet" href="../../Admin2/css/header_style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 

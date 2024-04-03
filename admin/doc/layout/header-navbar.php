@@ -25,8 +25,8 @@
         <!-- Add other menu items as needed -->
         <!-- <li><a class="app-menu__item active" href="index.php"><i class='app-menu__icon bx bx-tachometer'></i><span
                     class="app-menu__label">Bảng điều khiển</span></a></li> -->
-        <!-- <li><a class="app-menu__item " href="table-data-table.php"><i class='app-menu__icon bx bx-id-card'></i> <span
-                    class="app-menu__label">Quản lý nhân viên</span></a></li> -->
+        <li><a class="app-menu__item " href="../categories/table-data-categories.php"><i class='app-menu__icon bx bx-id-card'></i> <span
+                    class="app-menu__label">Quản lý danh mục</span></a></li>
         <li><a class="app-menu__item" href="../User/index.php"><i class='app-menu__icon bx bx-user-voice'></i><span
                     class="app-menu__label">Quản lý khách hàng</span></a></li>
         <li><a class="app-menu__item" href="../products/table-data-product.php"><i

@@ -14,10 +14,10 @@
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../Admin2/css/bootstrap.css">
-    <link rel="stylesheet" href="../../Admin2/css/header_style.css">
-    <link rel="stylesheet" href="../../Admin2/css/main_style.css">
-    <link rel="stylesheet" href="../../Admin2/css/profile.css">
+    <link rel="stylesheet" href="../../Asset/css/bootstrap.css">
+    <link rel="stylesheet" href="../../Asset/css/header_style.css">
+    <link rel="stylesheet" href="../../Asset/css/main_style.css">
+    <link rel="stylesheet" href="../../Asset/css/profile.css">
 
     <title>XinXo - Order details</title>
 </head>
@@ -194,10 +194,10 @@ include("../Layout/Header.php");
                        style="font-size: 16px; padding-left :24px; padding-right: 24px">
                         Back
                     </a>
-                    <a href="#" class="btn btn-success"
+                    <!-- <a href="#" class="btn btn-success"
                        style="font-size: 16px; padding-left :24px; padding-right: 24px">
                         Payment details
-                    </a>
+                    </a> -->
                     <?php
                     foreach ($statusOrders as $ordStat) {
                         if ($ordStat['order_status'] == 0) {

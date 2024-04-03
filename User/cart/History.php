@@ -9,10 +9,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--font awesome cdn link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../Admin2/css/bootstrap.css">
-    <link rel="stylesheet" href="../../Admin2/css/header_style.css">
-    <link rel="stylesheet" href="../../Admin2/css/main_style.css">
-    <link rel="stylesheet" href="../../Admin2/css/profile.css">
+    <link rel="stylesheet" href="../../Asset/css/bootstrap.css">
+    <link rel="stylesheet" href="../../Asset/css/header_style.css">
+    <link rel="stylesheet" href="../../Asset/css/main_style.css">
+    <link rel="stylesheet" href="../../Asset/css/profile.css">
 
     <title>XinXo - Order History</title>
 </head>

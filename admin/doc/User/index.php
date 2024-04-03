@@ -78,7 +78,7 @@ include_once '../../../connect/close.php';
                             <td><?= $user['address']?> </td>
                             <td><?= $user['password']?></td>
                             <td><?= $user['email']?>  </td>
-                            <td><?php if( $user['status'] == 0){ echo 'Offline';} elseif ($user['status'] == 1){ echo 'Online';} else{ echo 'Locked';}?></td>
+                            <td><?php if( $user['user_status_id'] == 0){ echo 'Offline';} elseif ($user['user_status_id'] == 1){ echo 'Online';} else{ echo 'Locked';}?></td>
                             <td>Bán hàng</td>
                             <td class="table-td-center">
                                 <a href="destroy.php?id=<?=$user['user_id']?>" 
